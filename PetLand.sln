@@ -15,29 +15,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Interface Adapters", "3.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Frameworks And Drivers", "4. Frameworks And Drivers", "{79B2965C-876E-46D8-8E8F-AB5ED306D6B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetLand.App.Entities", "PetLand.Entities\PetLand.App.Entities.csproj", "{C61E43C3-365C-4CDE-8E6C-450FDDF931F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetLand.App.Entities", "PetLand.Entities\PetLand.App.Entities.csproj", "{C61E43C3-365C-4CDE-8E6C-450FDDF931F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetLand.App.BusinessObjects", "PetLand.BusinessObjects\PetLand.App.BusinessObjects.csproj", "{933A7630-33CD-4D3B-B2BC-E629FF86C172}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetLand.App.BusinessObjects", "PetLand.BusinessObjects\PetLand.App.BusinessObjects.csproj", "{933A7630-33CD-4D3B-B2BC-E629FF86C172}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetLand.App.UseCases", "PetLand.UseCases\PetLand.App.UseCases.csproj", "{ABE6D61C-4982-442B-8BD5-4FCAF04C8943}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetLand.App.UseCases", "PetLand.UseCases\PetLand.App.UseCases.csproj", "{ABE6D61C-4982-442B-8BD5-4FCAF04C8943}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetLand.App.Validators", "PetLand.Validators\PetLand.App.Validators.csproj", "{004B1169-BD3E-42D6-80B3-29D4C0B92EA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetLand.App.Validators", "PetLand.Validators\PetLand.App.Validators.csproj", "{004B1169-BD3E-42D6-80B3-29D4C0B92EA4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controllers", "Controllers", "{77ABD024-AD2F-4CC7-9F04-B1A802C54E2B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presenters", "Presenters", "{7DECE1EA-F8EC-4969-98A5-01B3965A5206}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetLand.App.Controllers", "PetLand.App.Controllers\PetLand.App.Controllers.csproj", "{71009774-FB79-4ED6-8D37-02ECCDF88E72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetLand.App.Controllers", "PetLand.App.Controllers\PetLand.App.Controllers.csproj", "{71009774-FB79-4ED6-8D37-02ECCDF88E72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetLand.App.Presenters", "PetLand.App.Presenters\PetLand.App.Presenters.csproj", "{D8FDEA50-C89C-4C92-B9D9-2DDFA83AD871}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetLand.App.Presenters", "PetLand.App.Presenters\PetLand.App.Presenters.csproj", "{D8FDEA50-C89C-4C92-B9D9-2DDFA83AD871}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gatetways", "Gatetways", "{FB9EF525-DADF-40DF-B931-DA1898892B64}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{FB9EF525-DADF-40DF-B931-DA1898892B64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetLand.App.IoC", "PetLand.App.IoC\PetLand.App.IoC.csproj", "{66FBBB6C-29CA-4DAC-B7F7-385B99FB94AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetLand.App.IoC", "PetLand.App.IoC\PetLand.App.IoC.csproj", "{66FBBB6C-29CA-4DAC-B7F7-385B99FB94AC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repositories", "Repositories", "{C2E2A0F9-3D97-451B-B535-708955C9C38B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetLand.App.EfCore.Repositories", "PetLand.App.EfCore.Repositories\PetLand.App.EfCore.Repositories.csproj", "{54230995-523D-4E8D-8C45-2EA43587F60A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetLand.App.EfCore.Repositories", "PetLand.App.EfCore.Repositories\PetLand.App.EfCore.Repositories.csproj", "{54230995-523D-4E8D-8C45-2EA43587F60A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterfaces", "UserInterfaces", "{00AC7401-3788-4590-8A43-9F1FC7AE5DDA}"
 EndProject
