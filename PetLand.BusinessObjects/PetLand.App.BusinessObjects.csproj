@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PetLand.Entities\PetLand.App.Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+    <Folder Include="Interfaces\Controllers\" />
+    <Folder Include="Interfaces\Repositories\" />
+    <Folder Include="Interfaces\Presenters\" />
+    <Folder Include="Interfaces\Ports\" />
+    <Folder Include="Enums\" />
+  </ItemGroup>
+
+</Project>
