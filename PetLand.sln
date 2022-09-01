@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetLand.Server", "PetLand\Server\PetLand.Server.csproj", "{4A462C2A-4F21-4D2D-9F3D-91CA9E25DE20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetLand.Server", "PetLand\Server\PetLand.Server.csproj", "{4A462C2A-4F21-4D2D-9F3D-91CA9E25DE20}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetLand.Client", "PetLand\Client\PetLand.Client.csproj", "{7F63B4BE-4194-4D24-A4F9-F9190E80689B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetLand.Client", "PetLand\Client\PetLand.Client.csproj", "{7F63B4BE-4194-4D24-A4F9-F9190E80689B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Enterprise Business Rules", "1. Enterprise Business Rules", "{532A872F-D1C5-4C2B-B117-255588F839BD}"
 EndProject
@@ -40,6 +40,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetLand.EfCore.Repositories", "PetLand.App.EfCore.Repositories\PetLand.EfCore.Repositories.csproj", "{54230995-523D-4E8D-8C45-2EA43587F60A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserInterfaces", "UserInterfaces", "{00AC7401-3788-4590-8A43-9F1FC7AE5DDA}"
+
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetLand.IoC", "PetLand.IoC\PetLand.IoC.csproj", "{B221C1F4-1D6C-40E1-8CF3-5801EF76424D}"
 EndProject
@@ -93,10 +94,12 @@ Global
 		{B221C1F4-1D6C-40E1-8CF3-5801EF76424D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B221C1F4-1D6C-40E1-8CF3-5801EF76424D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B221C1F4-1D6C-40E1-8CF3-5801EF76424D}.Release|Any CPU.Build.0 = Release|Any CPU
+
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+
 	GlobalSection(NestedProjects) = preSolution
 		{4A462C2A-4F21-4D2D-9F3D-91CA9E25DE20} = {00AC7401-3788-4590-8A43-9F1FC7AE5DDA}
 		{7F63B4BE-4194-4D24-A4F9-F9190E80689B} = {00AC7401-3788-4590-8A43-9F1FC7AE5DDA}
@@ -115,6 +118,7 @@ Global
 		{00AC7401-3788-4590-8A43-9F1FC7AE5DDA} = {79B2965C-876E-46D8-8E8F-AB5ED306D6B6}
 		{B221C1F4-1D6C-40E1-8CF3-5801EF76424D} = {FB9EF525-DADF-40DF-B931-DA1898892B64}
 	EndGlobalSection
+
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {68EC35BA-C27D-4498-8E1E-C0B6BEA26A40}
 	EndGlobalSection
