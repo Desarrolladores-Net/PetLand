@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PetLand.BusinessObjects\PetLand.App.BusinessObjects.csproj" />
+    <ProjectReference Include="..\PetLand.BusinessObjects\PetLand.App.DTO.csproj" />
   </ItemGroup>
 
 </Project>
