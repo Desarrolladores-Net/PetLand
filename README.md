@@ -6,15 +6,14 @@ Durante el transcurso del desarrollo del proyecto se verán los siguientes temas
 1) Autenticación en cliente y servidor
 2) Arquitecturas limpias
 3) Docker
-4) Deploy en heroku
-5) Almacenamiento de ficheros en la nube
-6) Inyecciones de dependencia
-7) Envío de correos desde la plataforma
+4) Almacenamiento de ficheros en la nube
+5) Inyecciones de dependencia
+6) Envío de correos desde la plataforma
 
 ## Tecnologías
 Para el desarrollo del sistema se tendrán en cuenta las siguientes tecnologías
 1) PostgreSQL
-2) .Net 6
+2) .Net 7
 3) Docker
 4) Heroku CLI
 5) Blazor WebAssembly
