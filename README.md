@@ -9,6 +9,6 @@ La adopción de animales domésticos es un acto de solidaridad y amor que benefi
 - PostgreSQL
 - Docker
 
-## Arquitectura
+## Arquitectura  🧱
  - Clean Architecture
  
