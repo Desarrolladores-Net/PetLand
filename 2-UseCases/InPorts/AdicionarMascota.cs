@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace UseCases.InPorts;
 
-public class AdicionarMascota : IAdicionarMascota
+public class AdicionarMascota
 {
     public AdicionarMascota()
     {
