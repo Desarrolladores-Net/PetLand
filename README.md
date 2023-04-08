@@ -5,7 +5,8 @@ La adopción de animales domésticos es un acto de solidaridad y amor que benefi
 ## Tecnologías 🖥
 - .Net 7
 - Node.Js
-- NPM
+- PNPM
+- Nuxt.js
 - PostgreSQL
 - Docker
 
