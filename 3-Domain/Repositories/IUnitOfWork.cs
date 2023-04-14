@@ -10,5 +10,6 @@ namespace Domain.Repositories
         IUserRepository User { get; }
         IPetRepository Pet { get; }
         IAddressRepository Address { get; }
+        Task SaveAsync();
     }
 }
