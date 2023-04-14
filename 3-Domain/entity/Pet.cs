@@ -8,13 +8,13 @@ namespace Domain.Entity
     public class Pet
     {
 
-        public int id { get; set; }
-        public int userId { get; set; }
-        public string? fullname { get; set; }
-        public int? age { get; set; }
-        public Address address { get; set; }
-        public string? description { get; set; }
-        public bool wasAdopted { get; set; }
-        public DateTime adoptionDate { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public string? Fullname { get; set; }
+        public int? Age { get; set; }
+        public Address Address { get; set; }
+        public string? Description { get; set; }
+        public bool WasAdopted { get; set; }
+        public DateTime AdoptionDate { get; set; }
     }
 }
