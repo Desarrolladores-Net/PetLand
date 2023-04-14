@@ -7,11 +7,11 @@ namespace Domain.Entity
 {
     public class User
     {
-        public int id { get; set; }
-        public string fullname { get; set; }
-        public string email { get; set; }
-        public int phone { get; set; }
-        public List<Pet> petsReported { get; set; }
+        public int Id { get; set; }
+        public string Fullname { get; set; }
+        public string Email { get; set; }
+        public int Phone { get; set; }
+        public List<Pet> PetsReported { get; set; }
         public string role { get; set; }
     }
 }

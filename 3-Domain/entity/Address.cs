@@ -7,10 +7,10 @@ namespace Domain.Entity
 {
     public class Address
     {
-        public int id { get; set; }
-        public int petId { get; set; }
-        public string province { get; set; }
-        public string municipe { get; set; }
-        public string streetName { get; set; }
+        public int Id { get; set; }
+        public int PetId { get; set; }
+        public string Province { get; set; }
+        public string Municipe { get; set; }
+        public string StreetName { get; set; }
     }
 }
