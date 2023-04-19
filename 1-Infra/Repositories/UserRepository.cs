@@ -30,10 +30,6 @@ namespace Infra.Repositories
 
         public Task<User> GetOne(int id) => _context.User.FindAsync(id).AsTask()!;
 
-        public Task GetOneAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task UpdateAsync(User entity)
         {

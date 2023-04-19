@@ -30,10 +30,6 @@ namespace Infra.Repositories
 
         public Task<Pet> GetOne(int id) => _context.PetsReported.FindAsync(id).AsTask()!;
 
-        public Task GetOneAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task UpdateAsync(Pet entity)
         {

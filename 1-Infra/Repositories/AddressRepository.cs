@@ -30,11 +30,6 @@ namespace Infra.Repositories
 
         public Task<Address> GetOne(int id) => _context.Address.FindAsync(id).AsTask()!;
 
-        public Task GetOneAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task UpdateAsync(Address entity)
         {
             _context.Update(entity);
