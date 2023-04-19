@@ -2,18 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Infra;
+using Domain.Services.Token;
 using Microsoft.Extensions.DependencyInjection;
-using Services;
+using Services.Token;
 
-namespace IoC
+namespace Services
 {
     public static class DependencyContainer
     {
-        public static IServiceCollection AddMyServices(this IServiceCollection services, string connectionString)
+        public static IServiceCollection AddCustomServices(this IServiceCollection services)
         {
-            services.AddPostgreSQL(connectionString);
-            services.AddCustomServices();
+            
+            services.AddScoped<ITokenManager, TokenManager>();
+
             return services;
         }
     }
