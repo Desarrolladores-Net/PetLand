@@ -10,6 +10,7 @@ using Domain.Repositories;
 using Infra.Data;
 using Infra.Repositories;
 
+
 namespace Infra.Data
 {
     public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
@@ -17,17 +18,14 @@ namespace Infra.Data
         public AppDbContext CreateDbContext(string[] args)
         {
             var OptionBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            var builder = WebApplication.CreateBuilder(args);
+         
 
             OptionBuilder.UseNpgsql("Host=127.0.0.1;Port=5432;Database=petland;User Id=postgres;Password=9902;");
 
             return new AppDbContext(OptionBuilder.Options);
 
 
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddScoped<IAddressRepository, AddressRepository>();
-            builder.Services.AddScoped<IPetRepository, PetsReportedRepository>();
-            builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+        
 
 
 
