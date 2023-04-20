@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Domain.DTO
+namespace Domain.DTO.User
 {
     public class RegisterDTO
     {

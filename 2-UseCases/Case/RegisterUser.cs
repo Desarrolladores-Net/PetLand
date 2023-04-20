@@ -13,6 +13,8 @@ using UseCases.InPorts;
 using UseCases.OutPorts;
 using System.Security.Claims;
 using Domain.ModelObject.Token;
+using Domain.DTO.User;
+using Domain.ResultObject.User;
 
 namespace UseCases.Case
 {

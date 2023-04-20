@@ -6,6 +6,7 @@ using Domain.DTO;
 using Domain;
 using OneOf;
 using Domain.ResultObject;
+using Domain.ResultObject.User;
 
 namespace UseCases.OutPorts
 {
