@@ -17,7 +17,7 @@ namespace Infra.Repositories
         {
             _context = context;
         }
-        public async Task AddAsync(User entity) => await _context.AddAsync(entity);
+        public async Task AddAsync(User entity) => _context.AddAsync(entity);
 
         public async Task<User> Delete(int id)
         {
@@ -25,6 +25,8 @@ namespace Infra.Repositories
             _context.Remove(user!);
             return user!;
         }
+
+        public Task<bool> Exist(string email) => _context.User.AnyAsync(x => x.Email == email);
 
         public Task<List<User>> GetAll() => _context.User.ToListAsync();
 
