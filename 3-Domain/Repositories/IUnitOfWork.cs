@@ -7,9 +7,9 @@ namespace Domain.Repositories
 {
     public interface IUnitOfWork
     {
-        IUserRepository User { get; }
-        IPetRepository Pet { get; }
-        IAddressRepository Address { get; }
+        IUserRepository UserRepository { get; }
+        IPetRepository PetRepository { get; }
+        IAddressRepository AddressRepository { get; }
         Task SaveAsync();
     }
 }

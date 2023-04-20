@@ -13,6 +13,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\1-IoC\IoC.csproj" />
+    <ProjectReference Include="..\..\2-UseCases\UseCases.csproj" />
+    <ProjectReference Include="..\..\3-Domain\Domain.csproj" />
+    <ProjectReference Include="..\..\2-Presenters\Presenters.csproj" />
   </ItemGroup>
 
 </Project>

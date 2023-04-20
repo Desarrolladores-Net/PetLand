@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Infra;
 using Microsoft.Extensions.DependencyInjection;
+using Presenters;
 using Services;
+using UseCases;
 
 namespace IoC
 {
@@ -14,6 +16,8 @@ namespace IoC
         {
             services.AddPostgreSQL(connectionString);
             services.AddCustomServices();
+            services.AddUseCases();
+            services.AddPresenters();
             return services;
         }
     }
