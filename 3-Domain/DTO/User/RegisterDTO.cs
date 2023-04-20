@@ -17,7 +17,9 @@ namespace Domain.DTO.User
         [Required (ErrorMessage = "Necesitas una contraseña para proteger tu cuenta")]
         [MinLength (8, ErrorMessage = "Tu contraseña debe tener al menos 8 caracteres")]
         public string Password { get; set; }
-
+        
+        [Compare("Password", ErrorMessage = "Tus contraseñas no coinciden")]
+        public string ConfirmPassword { get; set; }
 
     }
 }
