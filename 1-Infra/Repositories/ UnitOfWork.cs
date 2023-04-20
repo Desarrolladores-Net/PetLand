@@ -10,23 +10,23 @@ namespace Infra.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public IPetRepository Pet { get; }
+        public IPetRepository PetRepository { get; }
 
-        public IUserRepository User { get; }
-        public IAddressRepository Address { get; }
+        public IUserRepository UserRepository { get; }
+        public IAddressRepository AddressRepository { get; }
 
-        private AppDbContext _context;
+        private AppDbContext Context;
 
         public UnitOfWork(IPetRepository Pet, IUserRepository User, IAddressRepository Address, AppDbContext _context)
         {
-            Pet = Pet;
-            User = User;
-            Address = Address;
-            _context = _context;
+            PetRepository = Pet;
+            UserRepository = User;
+            AddressRepository = Address;
+            Context = _context;
         }
         public async Task SaveAsync()
         {
-            await _context.SaveChangesAsync();
+            await Context.SaveChangesAsync();
         }
 
     }

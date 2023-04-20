@@ -10,8 +10,9 @@ namespace Domain.Entity
         public int Id { get; set; }
         public string Fullname { get; set; }
         public string Email { get; set; }
-        public int Phone { get; set; }
+        public string Phone { get; set; }
         public List<Pet> PetsReported { get; set; }
-        public string role { get; set; }
+        public string Role { get; set; }
+        public string Password { get; set; }
     }
 }

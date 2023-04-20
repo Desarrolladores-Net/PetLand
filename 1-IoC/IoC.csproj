@@ -3,6 +3,8 @@
   <ItemGroup>
     <ProjectReference Include="..\1-Infra\Infra.csproj" />
     <ProjectReference Include="..\2-Services\Services.csproj" />
+    <ProjectReference Include="..\2-UseCases\UseCases.csproj" />
+    <ProjectReference Include="..\2-Presenters\Presenters.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

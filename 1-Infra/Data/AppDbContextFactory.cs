@@ -25,10 +25,6 @@ namespace Infra.Data
             return new AppDbContext(OptionBuilder.Options);
 
 
-        
-
-
-
         }
     }
 }
