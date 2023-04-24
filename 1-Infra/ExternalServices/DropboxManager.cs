@@ -17,11 +17,16 @@ namespace Infra.ExternalServices
             _dbx = dbx;
         }
 
+        private Task<FileMetadata> UploadFile(string path, Stream content)
+        {
+            return _dbx.Files.UploadAsync(path, WriteMode.Overwrite.Instance, body: content);
+        }
+
         public async Task<string> UploadPetPhoto(Stream content, int id, string extension )
         {
             var path = Path.Combine("pet",id.ToString(),"avatar"+extension);
 
-            var response = await _dbx.Files.UploadAsync(path, WriteMode.Overwrite.Instance, body: content);
+            var response = await UploadFile(path, content);
 
             return response.Name;
 
