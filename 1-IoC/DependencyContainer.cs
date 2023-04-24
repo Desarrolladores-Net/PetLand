@@ -12,9 +12,10 @@ namespace IoC
 {
     public static class DependencyContainer
     {
-        public static IServiceCollection AddMyServices(this IServiceCollection services, string connectionString)
+        public static IServiceCollection AddMyServices(this IServiceCollection services, string connectionString, string dropboxToken)
         {
             services.AddPostgreSQL(connectionString);
+            services.AddDrobox(dropboxToken);
             services.AddCustomServices();
             services.AddUseCases();
             services.AddPresenters();
