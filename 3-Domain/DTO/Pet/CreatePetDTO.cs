@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Domain.DTO.Pet
 {
@@ -14,5 +15,6 @@ namespace Domain.DTO.Pet
         public string Province { get; set; }
         public string Municipe { get; set; }
         public string StreetName { get; set; }
+        public IFormFile Photo { get; set; }
     }
 }
