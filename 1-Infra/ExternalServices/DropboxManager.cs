@@ -24,7 +24,8 @@ namespace Infra.ExternalServices
 
         public async Task<string> UploadPetPhoto(Stream content, int id, string extension )
         {
-            var path = Path.Combine("pet",id.ToString(),"avatar"+extension);
+            var fileName = Guid.NewGuid().ToString();
+            var path = Path.Combine("pet",id.ToString(),fileName+extension);
 
             var response = await UploadFile(path, content);
 
