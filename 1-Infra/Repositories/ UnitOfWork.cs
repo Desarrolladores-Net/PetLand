@@ -27,7 +27,19 @@ namespace Infra.Repositories
         }
         public async Task SaveAsync()
         {
-                await Context.SaveChangesAsync();
+            try
+            {
+                 await Context.SaveChangesAsync();
+            }
+            catch(Exception error)
+            {
+                throw new Error()
+                {
+                    Reason = ErrorReason.SaveEntity,
+                    Message = "Error al salvar la entidad"
+                };
+            }
+               
         }
     }
 }
