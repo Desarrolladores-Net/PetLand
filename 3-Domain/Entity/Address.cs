@@ -8,8 +8,8 @@ namespace Domain.Entity
 {
     public class Address
     {
-        public int Id { get; set; }
-        public int PetId { get; set; }
+        public string Id { get; set; }
+        public string PetId { get; set; }
         public string Province { get; set; }
         public string Municipe { get; set; }
         public string StreetName { get; set; }

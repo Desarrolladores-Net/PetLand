@@ -8,7 +8,7 @@ namespace Domain.DTO.Pet
 {
     public class CreatePetDTO
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public string? Fullname { get; set; }
         public int? Age { get; set; }
         public string? Description { get; set; }

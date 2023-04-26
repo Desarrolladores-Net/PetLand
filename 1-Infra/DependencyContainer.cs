@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.Repositories;
-using Domain.Services.ExternalServices;
-using Dropbox.Api;
+using Domain.Services.Files;
 using Infra.Data;
-using Infra.ExternalServices;
+using Infra.Files;
 using Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,20 +23,13 @@ namespace Infra
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPetRepository, PetsReportedRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
-
+            services.AddScoped<IFileManager, FileManager>();
 
 
             return services;
         }
 
-        public static IServiceCollection AddDrobox(this IServiceCollection services, string dropboxToken)
-        {
-            services.AddScoped<IDropboxManager, DropboxManager>();
-            services.AddScoped<DropboxClient>(serviceProvider => new DropboxClient(dropboxToken));
 
-            return services;
-
-        }
 
 
     }

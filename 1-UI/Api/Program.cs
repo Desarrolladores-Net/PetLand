@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
         cor.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
 });
-builder.Services.AddMyServices(builder.Configuration.GetConnectionString("Dev"), builder.Configuration["DropboxToken"]);
+builder.Services.AddMyServices(builder.Configuration.GetConnectionString("Dev"));
 
 var app = builder.Build();
 

@@ -12,7 +12,7 @@
 .vscode
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
-
+wwwroot/
 # Mono auto generated files
 mono_crash.*
 
