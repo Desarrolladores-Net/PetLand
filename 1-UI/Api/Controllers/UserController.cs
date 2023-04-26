@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain;
 using Domain.DTO;
+using Domain.DTO.User;
 using Domain.ResultObject;
+using Domain.ResultObject.User;
 using Microsoft.AspNetCore.Mvc;
 using OneOf;
 using Presenters;
@@ -32,7 +34,7 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterUser(RegisterDTO dto)
         {
-            await RegisterInport.Handle(dto,Configuration["Secret"]);
+            await RegisterInport.Handle(dto,Configuration["SecretKey"]);
 
             var result = ((IPresenter<OneOf<RegisterResult, Error>>)RegisterOutport).Content;
 

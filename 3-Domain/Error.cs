@@ -6,7 +6,13 @@ namespace Domain;
 
 
 public enum ErrorReason{
-    AlreadyExist   
+    AlreadyExist,
+    CreateFile,
+    SaveEntity   
 }
 
-public record class Error(ErrorReason Reason, string Message);
+public class Error : Exception
+{
+    public ErrorReason Reason { get; set; }
+    public string Message { get; set; }
+}

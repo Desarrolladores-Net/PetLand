@@ -13,6 +13,8 @@ using UseCases.InPorts;
 using UseCases.OutPorts;
 using System.Security.Claims;
 using Domain.ModelObject.Token;
+using Domain.DTO.User;
+using Domain.ResultObject.User;
 
 namespace UseCases.Case
 {
@@ -60,7 +62,11 @@ namespace UseCases.Case
             }
             else
             {
-                await OutputPort.Handle(new Error(ErrorReason.AlreadyExist, "Ya hay un usuario con ese email"));
+                await OutputPort.Handle(new Error()
+                {
+                    Message = "Ya hay un usuario con ese email",
+                    Reason = ErrorReason.AlreadyExist
+                });
             }
             
         }
