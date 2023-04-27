@@ -34,15 +34,29 @@ namespace Api.Controllers
 
             return result.Match(
             createResult => Ok(createResult),
-            error => Problem(
-                   detail: error.Message,
-                   statusCode: 500,
-                   title: "Server Error"
-               )
+            error => error switch
+            {
+                Error { Reason: ErrorReason.SaveEntity } => Problem(
+                  detail: error.Message,
+                  statusCode: 503,
+                  title: "Servicio no disponible"
+                ),
+                Error { Reason: ErrorReason.CreateFile } => Problem(
+                    detail: error.Message,
+                    statusCode: 409,
+                    title: "Server Error"
+                ),
+                _ => Problem(
+                    detail: error.Message,
+                    statusCode: 500,
+                    title: "Server Error"
+                )
+            }
             );
         }
 
-
-
     }
+
+
+
 }
