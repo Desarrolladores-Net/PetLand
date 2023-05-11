@@ -19,7 +19,8 @@ namespace UseCases
         {
             TypeAdapterConfig<RegisterDTO, User>.NewConfig();
             TypeAdapterConfig<User, RegisterResult>.NewConfig();
-            TypeAdapterConfig<Pet, GetPetResult>.NewConfig();
+            TypeAdapterConfig<Pet, GetPetResult>.NewConfig()
+            .Map(dest => dest.Address, src => $"{src.Address.StreetName}, {src.Address.Municipe}, {src.Address.Province}");
             
         }
     }

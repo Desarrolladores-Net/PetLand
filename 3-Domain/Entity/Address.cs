@@ -13,5 +13,6 @@ namespace Domain.Entity
         public string Province { get; set; }
         public string Municipe { get; set; }
         public string StreetName { get; set; }
+        public string MoreDetails { get; set; }
     }
 }
