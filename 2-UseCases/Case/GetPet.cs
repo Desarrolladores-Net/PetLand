@@ -37,7 +37,7 @@ namespace UseCases.Case
             catch (System.Exception ex)
             {
 
-                await _outputPort.Handle(new Error(ErrorReason.))
+                await _outputPort.Handle(new Error(ErrorReason.FailDatabase, "Error al conectar con la base de datos"));
             }
 
 

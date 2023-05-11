@@ -6,7 +6,8 @@ namespace Domain;
 
 
 public enum ErrorReason{
-    AlreadyExist   
+    AlreadyExist,
+    FailDatabase   
 }
 
 public record class Error(ErrorReason Reason, string Message);
