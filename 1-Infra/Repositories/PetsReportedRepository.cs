@@ -26,7 +26,10 @@ namespace Infra.Repositories
             return pet!;
         }
 
-        public Task<List<Pet>> GetAll() => _context.PetsReported.ToListAsync();
+        public Task<List<Pet>> GetAll(int skip)
+        {
+            return _context.PetsReported.Include(x => x.Address).Skip(skip).Take(10).ToListAsync();
+        }
 
         public Task<Pet> GetOne(int id) => _context.PetsReported.FindAsync(id).AsTask()!;
 

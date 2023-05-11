@@ -6,6 +6,7 @@ using Domain.DTO;
 using Domain.DTO.User;
 using Domain.Entity;
 using Domain.ResultObject;
+using Domain.ResultObject.Pet;
 using Domain.ResultObject.User;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,7 @@ namespace UseCases
         {
             TypeAdapterConfig<RegisterDTO, User>.NewConfig();
             TypeAdapterConfig<User, RegisterResult>.NewConfig();
+            TypeAdapterConfig<Pet, GetPetResult>.NewConfig();
             
         }
     }

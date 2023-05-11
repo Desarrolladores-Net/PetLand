@@ -28,7 +28,10 @@ namespace Infra.Repositories
 
         public Task<bool> Exist(string email) => _context.User.AnyAsync(x => x.Email == email);
 
-        public Task<List<User>> GetAll() => _context.User.ToListAsync();
+        public Task<List<User>> GetAll(int skip)
+        {
+            return _context.User.Skip(skip).Take(10).ToListAsync();
+        }
 
         public Task<User> GetOne(int id) => _context.User.FindAsync(id).AsTask()!;
 
