@@ -34,7 +34,7 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterUser(RegisterDTO dto)
         {
-            await RegisterInport.Handle(dto,Configuration["Secret"]);
+            await RegisterInport.Handle(dto,Configuration["SecretKey"]);
 
             var result = ((IPresenter<OneOf<RegisterResult, Error>>)RegisterOutport).Content;
 

@@ -19,6 +19,9 @@ namespace UseCases
 
 
             
+            services.AddScoped<ICreatePetInport, CreatePet>();
+
+
             services.RegisterMapsterConfiguration();
 
             return services;

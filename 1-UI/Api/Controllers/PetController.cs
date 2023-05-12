@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
+using Domain.DTO.Pet;
 using Domain.Repositories;
 using Domain.ResultObject.Pet;
 using Microsoft.AspNetCore.Mvc;
@@ -20,11 +21,44 @@ namespace Api.Controllers
         
         private IGetPetsInport GetPetsCase;
         private IGetPetsOutport GetPetsOutport;
+         private ICreatePetInport CreatePetInport;
+        private ICreatePetOutport CreatePetOutport;
 
-        public PetController(IGetPetsInport getPetsCase, IGetPetsOutport getPetsOutport)
+        public PetController(IGetPetsInport getPetsCase, IGetPetsOutport getPetsOutport, ICreatePetInport createPetInport, ICreatePetOutport createPetOutport)
         {
             GetPetsCase = getPetsCase;
             GetPetsOutport = getPetsOutport;
+            CreatePetInport = createPetInport;
+            CreatePetOutport = createPetOutport;
+        }
+        
+         [HttpPost]
+        public async Task<IActionResult> CeatePetEndpoint([FromForm] CreatePetDTO dto)
+        {
+            await CreatePetInport.Handle(dto);
+            var result = ((IPresenter<OneOf<CreatePetResult, Error>>)CreatePetOutport).Content;
+
+            return result.Match(
+            createResult => Ok(createResult),
+            error => error switch
+            {
+                Error { Reason: ErrorReason. } => Problem(
+                  detail: error.Message,
+                  statusCode: 503,
+                  title: "Servicio no disponible"
+                ),
+                Error { Reason: ErrorReason.CreateFile } => Problem(
+                    detail: error.Message,
+                    statusCode: 409,
+                    title: "Server Error"
+                ),
+                _ => Problem(
+                    detail: error.Message,
+                    statusCode: 500,
+                    title: "Server Error"
+                )
+            }
+            );
         }
 
         [HttpGet("all")]

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain;
 using Domain.Entity;
 using Domain.Repositories;
 using Infra.Data;
@@ -26,8 +27,19 @@ namespace Infra.Repositories
         }
         public async Task SaveAsync()
         {
-            await Context.SaveChangesAsync();
+            try
+            {
+                 await Context.SaveChangesAsync();
+            }
+            catch(Exception error)
+            {
+                throw new Error()
+                {
+                    Reason = ErrorReason.SaveEntity,
+                    Message = "Error al salvar la entidad"
+                };
+            }
+               
         }
-
     }
 }
