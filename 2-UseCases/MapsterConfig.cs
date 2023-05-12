@@ -29,7 +29,8 @@ namespace UseCases
                 Municipe = source.Municipe,
                 Province = source.Province,
                 StreetName = source.StreetName,
-                Id = Guid.NewGuid().ToString()
+                Id = Guid.NewGuid().ToString(),
+                MoreDetails = source.MoreDetails
             });
             TypeAdapterConfig<Pet, CreatePetResult>.NewConfig();
             
