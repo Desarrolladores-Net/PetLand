@@ -26,7 +26,10 @@ namespace Infra.Repositories
             return address!;
         }
 
-        public Task<List<Address>> GetAll() => _context.Address.ToListAsync();
+        public Task<List<Address>> GetAll(int skip)
+        {
+            return _context.Address.Skip(skip).Take(10).ToListAsync();
+        }
 
         public Task<Address> GetOne(int id) => _context.Address.FindAsync(id).AsTask()!;
 

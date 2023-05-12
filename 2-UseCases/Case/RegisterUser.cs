@@ -62,11 +62,7 @@ namespace UseCases.Case
             }
             else
             {
-                await OutputPort.Handle(new Error()
-                {
-                    Message = "Ya hay un usuario con ese email",
-                    Reason = ErrorReason.AlreadyExist
-                });
+                await OutputPort.Handle(new Error(ErrorReason.AlreadyExist, "Ya hay un usuario con ese email"));
             }
             
         }

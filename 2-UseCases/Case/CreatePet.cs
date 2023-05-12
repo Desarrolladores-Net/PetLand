@@ -46,14 +46,10 @@ namespace UseCases.Case
                 
 
             }
-            catch (Error ex)
+            catch (System.Exception ex)
             {
 
-                await Outport.Handle(new Error()
-                {
-                    Message = ex.Message,
-                    Reason = ex.Reason
-                });
+                await Outport.Handle(new Error(ErrorReason.SaveEntity, ex.Message));
             }
         }
     }

@@ -15,6 +15,10 @@ namespace UseCases
         {
 
             services.AddScoped<IRegisterUserInport, RegisterUser>();
+            services.AddScoped<IGetPetsInport, GetPet>();
+
+
+            
             services.AddScoped<ICreatePetInport, CreatePet>();
 
 

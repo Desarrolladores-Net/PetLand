@@ -35,11 +35,8 @@ namespace Infra.Files
             }
             catch(Error ex)
             {
-                throw new Error()
-                {
-                    Message = "Error al guardar la foto de la mascota",
-                    Reason = ErrorReason.CreateFile
-                };
+                throw new Error(ErrorReason.CreateFile, "Error al guardar el archivo");
+
             }
 
 

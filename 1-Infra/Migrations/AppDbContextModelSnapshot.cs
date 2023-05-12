@@ -27,6 +27,10 @@ namespace Infra.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
+                    b.Property<string>("MoreDetails")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Municipe")
                         .IsRequired()
                         .HasColumnType("text");

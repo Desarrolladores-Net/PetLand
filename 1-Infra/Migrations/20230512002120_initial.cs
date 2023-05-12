@@ -58,7 +58,8 @@ namespace Infra.Migrations
                     PetId = table.Column<string>(type: "text", nullable: false),
                     Province = table.Column<string>(type: "text", nullable: false),
                     Municipe = table.Column<string>(type: "text", nullable: false),
-                    StreetName = table.Column<string>(type: "text", nullable: false)
+                    StreetName = table.Column<string>(type: "text", nullable: false),
+                    MoreDetails = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

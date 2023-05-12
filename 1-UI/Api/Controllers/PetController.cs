@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain;
 using Domain.DTO.Pet;
+using Domain.Repositories;
 using Domain.ResultObject.Pet;
 using Microsoft.AspNetCore.Mvc;
 using OneOf;
@@ -17,16 +18,21 @@ namespace Api.Controllers
     [Route("api/[controller]")]
     public class PetController : ControllerBase
     {
-        private ICreatePetInport CreatePetInport;
+        
+        private IGetPetsInport GetPetsCase;
+        private IGetPetsOutport GetPetsOutport;
+         private ICreatePetInport CreatePetInport;
         private ICreatePetOutport CreatePetOutport;
 
-        public PetController(ICreatePetInport createPetInport, ICreatePetOutport createPetOutport)
+        public PetController(IGetPetsInport getPetsCase, IGetPetsOutport getPetsOutport, ICreatePetInport createPetInport, ICreatePetOutport createPetOutport)
         {
+            GetPetsCase = getPetsCase;
+            GetPetsOutport = getPetsOutport;
             CreatePetInport = createPetInport;
             CreatePetOutport = createPetOutport;
         }
-
-        [HttpPost]
+        
+         [HttpPost]
         public async Task<IActionResult> CeatePetEndpoint([FromForm] CreatePetDTO dto)
         {
             await CreatePetInport.Handle(dto);
@@ -36,7 +42,7 @@ namespace Api.Controllers
             createResult => Ok(createResult),
             error => error switch
             {
-                Error { Reason: ErrorReason.SaveEntity } => Problem(
+                Error { Reason: ErrorReason.FailDatabase } => Problem(
                   detail: error.Message,
                   statusCode: 503,
                   title: "Servicio no disponible"
@@ -55,8 +61,32 @@ namespace Api.Controllers
             );
         }
 
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAll([FromQuery]int skip)
+        {
+            await GetPetsCase.Handle(skip);
+            
+            var result = ((IPresenter<OneOf<List<GetPetResult>, Error>>)GetPetsOutport).Content;
+
+            return result.Match(
+            getPetResult => Ok(getPetResult),
+            error => error switch 
+            {
+                Error {Reason: ErrorReason.FailDatabase} => Problem(
+                    detail: error.Message,
+                    statusCode: 500,
+                    title: "Server error" 
+                ),
+                 _ => Problem(
+                    detail: error.Message,
+                    statusCode: 500,
+                    title: "Server Error"
+                )
+            });
+
+
+        }
+
+
     }
-
-
-
 }
