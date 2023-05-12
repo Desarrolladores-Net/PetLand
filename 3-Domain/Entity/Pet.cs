@@ -8,8 +8,8 @@ namespace Domain.Entity
     public class Pet
     {
 
-        public int Id { get; set; }
-        public int UserId { get; set; }
+        public string Id { get; set; }
+        public string UserId { get; set; }
         public string? Fullname { get; set; }
         public int? Age { get; set; }
         public Address Address { get; set; }

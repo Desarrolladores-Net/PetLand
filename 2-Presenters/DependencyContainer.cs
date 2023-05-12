@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Presenters.Pet;
+using Presenters.Pet;
 using Presenters.User;
+using UseCases.Case;
+using UseCases.Case;
 using UseCases.OutPorts;
 
 namespace Presenters
@@ -14,8 +18,8 @@ namespace Presenters
         {
 
             services.AddScoped<IRegisterUserOutport, RegisterUserPresenter>();
-            
-
+            services.AddScoped<IGetPetsOutport, GetPetsPresenter>();
+            services.AddScoped<ICreatePetOutport, CreatePetPresenter>();
             return services;
         }
     }
