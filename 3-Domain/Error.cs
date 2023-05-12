@@ -8,7 +8,8 @@ namespace Domain;
 public enum ErrorReason{
     AlreadyExist,
     FailDatabase,
-    CreateFile   
+    CreateFile,
+    SaveEntity   
 }
 
 public class Error : Exception
@@ -16,8 +17,11 @@ public class Error : Exception
     public ErrorReason Reason { get; set; }
     public string Message { get; set; }
 
-    public Error()
+    
+    public Error(ErrorReason reason, string message)
     {
+        Reason = reason;
+        Message = message;
     }
 
     public Error(string message)

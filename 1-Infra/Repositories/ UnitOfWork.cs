@@ -33,11 +33,7 @@ namespace Infra.Repositories
             }
             catch(Exception error)
             {
-                throw new Error()
-                {
-                    Reason = ErrorReason.SaveEntity,
-                    Message = "Error al salvar la entidad"
-                };
+                throw new Error(ErrorReason.SaveEntity, "Error al salvar la entidad");
             }
                
         }

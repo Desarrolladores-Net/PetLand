@@ -49,11 +49,7 @@ namespace UseCases.Case
             catch (Error ex)
             {
 
-                await Outport.Handle(new Error()
-                {
-                    Message = ex.Message,
-                    Reason = ex.Reason
-                });
+                await Outport.Handle(new Error(ex.Reason, ex.Message));
             }
         }
     }

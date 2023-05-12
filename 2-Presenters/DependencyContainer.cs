@@ -19,7 +19,7 @@ namespace Presenters
 
             services.AddScoped<IRegisterUserOutport, RegisterUserPresenter>();
             services.AddScoped<IGetPetsOutport, GetPetsPresenter>();
-
+            services.AddScoped<ICreatePetOutport, CreatePetPresenter>();
             return services;
         }
     }

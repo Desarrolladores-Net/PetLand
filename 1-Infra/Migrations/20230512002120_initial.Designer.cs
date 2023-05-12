@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230511232226_otra")]
-    partial class otra
+    [Migration("20230512002120_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,18 +27,20 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Domain.Entity.Address", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<string>("MoreDetails")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Municipe")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("PetId")
-                        .HasColumnType("integer");
+                    b.Property<string>("PetId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Province")
                         .IsRequired()
@@ -58,11 +60,8 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Domain.Entity.Pet", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("AdoptionDate")
                         .HasColumnType("timestamp with time zone");
@@ -76,8 +75,9 @@ namespace Infra.Migrations
                     b.Property<string>("Fullname")
                         .HasColumnType("text");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<bool>("WasAdopted")
                         .HasColumnType("boolean");
@@ -91,11 +91,8 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Domain.Entity.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .IsRequired()
