@@ -42,7 +42,7 @@ namespace Api.Controllers
             createResult => Ok(createResult),
             error => error switch
             {
-                Error { Reason: ErrorReason. } => Problem(
+                Error { Reason: ErrorReason.FailDatabase } => Problem(
                   detail: error.Message,
                   statusCode: 503,
                   title: "Servicio no disponible"

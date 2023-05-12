@@ -7,7 +7,8 @@ namespace Domain;
 
 public enum ErrorReason{
     AlreadyExist,
-    FailDatabase   
+    FailDatabase,
+    CreateFile   
 }
 
 public class Error : Exception
