@@ -19,7 +19,7 @@ namespace Infra.Files
             }
         }
 
-        public async Task SavePetPicture(IFormFile file, string petId)
+        public async Task<string> SavePetPicture(IFormFile file, string petId)
         {
             try
             {
@@ -31,7 +31,8 @@ namespace Infra.Files
                 path = Path.Combine(path,nameFile);
 
                 using var stream = System.IO.File.Create(path);
-                file.CopyToAsync(stream);
+                await file.CopyToAsync(stream);
+                return path.Replace("wwwroot", "");
             }
             catch(Error ex)
             {

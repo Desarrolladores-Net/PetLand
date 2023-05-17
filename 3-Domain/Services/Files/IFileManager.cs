@@ -8,6 +8,6 @@ namespace Domain.Services.Files
 {
     public interface IFileManager
     {
-        Task SavePetPicture(IFormFile file, string petId);
+        Task<string> SavePetPicture(IFormFile file, string petId);
     }
 }
