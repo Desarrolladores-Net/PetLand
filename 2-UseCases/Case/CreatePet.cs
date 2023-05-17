@@ -38,8 +38,10 @@ namespace UseCases.Case
 
                 await _unitOfWork.SaveAsync();
 
-                await _fileManager.SavePetPicture(dto.Photo, entity.Id);
+                var path = await _fileManager.SavePetPicture(dto.Photo, entity.Id);
                 
+                entity.PhotoPath = path;
+
                 var result = entity.Adapt<CreatePetResult>();
 
                 await Outport.Handle(result);
