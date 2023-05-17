@@ -43,7 +43,7 @@ namespace UseCases.Case
                 await UnitOfWork.UserRepository.AddAsync(entity);
                 await UnitOfWork.SaveAsync();
                 var result = entity.Adapt<RegisterResult>();
-
+                result.Id = entity.Id;
                 List<Claim> claims = new()
                 {
                     new Claim(ClaimTypes.Role, entity.Role),

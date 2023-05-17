@@ -15,7 +15,7 @@ namespace Domain.Entity
         public Address Address { get; set; }
         public string? Description { get; set; }
         public bool WasAdopted { get; set; }
-        public DateTime AdoptionDate { get; set; }
+        public DateTime? AdoptionDate { get; set; }
         public string PhotoPath { get; set; }
     }
 }

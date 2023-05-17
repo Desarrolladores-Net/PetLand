@@ -15,7 +15,7 @@ namespace Domain.DTO.Pet
         public string Province { get; set; }
         public string Municipe { get; set; }
         public string StreetName { get; set; }
-        public string MoreDetails { get; set; }
+        public string? MoreDetails { get; set; }
         public IFormFile Photo { get; set; }
     }
 }

@@ -33,19 +33,22 @@ namespace UseCases.Case
             try
             {
                 var entity = dto.Adapt<Pet>();
+                var path = await _fileManager.SavePetPicture(dto.Photo, entity.Id);
 
+                entity.PhotoPath = path;
                 await _unitOfWork.PetRepository.AddAsync(entity);
 
                 await _unitOfWork.SaveAsync();
 
-                var path = await _fileManager.SavePetPicture(dto.Photo, entity.Id);
-                
-                entity.PhotoPath = path;
 
-                var result = entity.Adapt<CreatePetResult>();
+
+                var result = new CreatePetResult()
+                {
+                    Success = true
+                };
 
                 await Outport.Handle(result);
-                
+
 
             }
             catch (System.Exception ex)
