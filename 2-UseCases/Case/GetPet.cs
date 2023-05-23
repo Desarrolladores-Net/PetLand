@@ -9,6 +9,7 @@ using UseCases.InPorts;
 using UseCases.OutPorts;
 using OneOf;
 using Domain;
+using Domain.Entity;
 
 namespace UseCases.Case
 {
@@ -23,11 +24,29 @@ namespace UseCases.Case
             _outputPort = outputPort;
         }
 
-        public async Task Handle(int skip)
+        public async Task Handle(int skip, string province, string municipality)
         {
             try
             {
-                var pets = await _unitOfWork.PetRepository.GetAll(skip);
+                List<Pet> pets = new();
+                if(province == "Todas")
+                {
+                    pets = await _unitOfWork.PetRepository.GetAll(skip);
+                }
+                else
+                {
+                    if(municipality == "Todos")
+                    {
+                        pets = await _unitOfWork.PetRepository.GetByProvince(skip, province);
+                    }
+                    else
+                    {
+                        pets = await _unitOfWork.PetRepository.GetByProvince(skip, province, municipality);
+                    }
+
+                    
+                }
+                
 
                 var result = pets.Adapt<List<GetPetResult>>();
 

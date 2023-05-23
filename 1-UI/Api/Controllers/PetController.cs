@@ -62,9 +62,9 @@ namespace Api.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<IActionResult> GetAll([FromQuery] int skip)
+        public async Task<IActionResult> GetAll([FromQuery] int skip, string province, string municipality)
         {
-            await GetPetsCase.Handle(skip);
+            await GetPetsCase.Handle(skip, province, municipality);
 
             var result = ((IPresenter<OneOf<List<GetPetResult>, Error>>)GetPetsOutport).Content;
 

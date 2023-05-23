@@ -7,6 +7,6 @@ namespace UseCases.InPorts
 {
     public interface IGetPetsInport
     {
-        Task Handle(int skip);
+        Task Handle(int skip, string province, string municipality);
     }
 }

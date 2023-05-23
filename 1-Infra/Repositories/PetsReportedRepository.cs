@@ -31,6 +31,18 @@ namespace Infra.Repositories
             return _context.PetsReported.Include(x => x.Address).Skip(skip).Take(10).ToListAsync();
         }
 
+        public Task<List<Pet>> GetByProvince(int skip, string province, string municipality)
+        {
+            return _context.PetsReported.Include(x => x.Address).Where(x => x.Address.Province == province && x.Address.Municipe == municipality)
+            .Skip(skip).Take(10).ToListAsync();
+        }
+
+        public Task<List<Pet>> GetByProvince(int skip, string province)
+        {
+            return _context.PetsReported.Include(x => x.Address).Where(x => x.Address.Province == province)
+            .Skip(skip).Take(10).ToListAsync();
+        }
+
         public Task<Pet> GetOne(int id) => _context.PetsReported.FindAsync(id).AsTask()!;
 
 
