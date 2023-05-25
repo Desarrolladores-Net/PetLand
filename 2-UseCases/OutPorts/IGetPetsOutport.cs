@@ -10,6 +10,6 @@ namespace UseCases.OutPorts
 {
     public interface IGetPetsOutport
     {
-        Task Handle(OneOf<List<GetPetResult>, Error> data);
+        Task Handle(OneOf<GetAllPetResult, Error> data);
     }
 }

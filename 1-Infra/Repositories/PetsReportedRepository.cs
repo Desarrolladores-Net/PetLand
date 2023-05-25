@@ -19,6 +19,22 @@ namespace Infra.Repositories
         }
         public async Task AddAsync(Pet entity) => await _context.AddAsync(entity);
 
+        public Task<int> Count()
+        {
+            return _context.PetsReported.Where(x => !x.WasAdopted).CountAsync();
+        }
+
+        public Task<int> Count(string province)
+        {
+            return _context.PetsReported.Include(x => x.Address).Where(x => x.Address.Province == province && !x.WasAdopted).CountAsync();
+        }
+
+        public Task<int> Count(string province, string municipality)
+        {
+            return _context.PetsReported.Include(x => x.Address).Where(x => x.Address.Province == province && x.Address.Municipe == municipality && !x.WasAdopted)
+            .CountAsync();
+        }
+
         public async Task<Pet> Delete(int id)
         {
             var pet = await _context.PetsReported.FindAsync(id);
@@ -28,18 +44,18 @@ namespace Infra.Repositories
 
         public Task<List<Pet>> GetAll(int skip)
         {
-            return _context.PetsReported.Include(x => x.Address).Skip(skip).Take(10).ToListAsync();
-        }
-
-        public Task<List<Pet>> GetByProvince(int skip, string province, string municipality)
-        {
-            return _context.PetsReported.Include(x => x.Address).Where(x => x.Address.Province == province && x.Address.Municipe == municipality)
-            .Skip(skip).Take(10).ToListAsync();
+            return _context.PetsReported.Include(x => x.Address).Where(x => !x.WasAdopted).Skip(skip).Take(10).ToListAsync();
         }
 
         public Task<List<Pet>> GetByProvince(int skip, string province)
         {
-            return _context.PetsReported.Include(x => x.Address).Where(x => x.Address.Province == province)
+            return _context.PetsReported.Include(x => x.Address).Where(x => x.Address.Province == province && !x.WasAdopted)
+            .Skip(skip).Take(10).ToListAsync();
+        }
+
+        public Task<List<Pet>> GetByProvince(int skip, string province, string municipality)
+        {
+            return _context.PetsReported.Include(x => x.Address).Where(x => x.Address.Province == province && x.Address.Municipe == municipality && !x.WasAdopted)
             .Skip(skip).Take(10).ToListAsync();
         }
 

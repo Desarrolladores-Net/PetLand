@@ -28,28 +28,36 @@ namespace UseCases.Case
         {
             try
             {
+
                 List<Pet> pets = new();
+                GetAllPetResult result = new();
+                int quanty = 0;
                 if(province == "Todas")
                 {
                     pets = await _unitOfWork.PetRepository.GetAll(skip);
+                    quanty = await _unitOfWork.PetRepository.Count();
+
                 }
                 else
                 {
                     if(municipality == "Todos")
                     {
                         pets = await _unitOfWork.PetRepository.GetByProvince(skip, province);
+                        quanty = await _unitOfWork.PetRepository.Count(province);
                     }
                     else
                     {
                         pets = await _unitOfWork.PetRepository.GetByProvince(skip, province, municipality);
+                        quanty = await _unitOfWork.PetRepository.Count(province, municipality);
                     }
 
                     
                 }
+
                 
 
-                var result = pets.Adapt<List<GetPetResult>>();
-
+                result.info = pets.Adapt<List<GetPetResult>>();
+                result.Quanty = quanty;
 
                 await _outputPort.Handle(result);
             }

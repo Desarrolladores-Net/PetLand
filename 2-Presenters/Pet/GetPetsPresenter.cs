@@ -9,11 +9,11 @@ using UseCases.OutPorts;
 
 namespace Presenters.Pet
 {
-    public class GetPetsPresenter : IPresenter<OneOf<List<GetPetResult>, Error>>, IGetPetsOutport
+    public class GetPetsPresenter : IPresenter<OneOf<GetAllPetResult, Error>>, IGetPetsOutport
     {
-        public OneOf<List<GetPetResult>, Error> Content {private set; get;}
+        public OneOf<GetAllPetResult, Error> Content {private set; get;}
 
-        public Task Handle(OneOf<List<GetPetResult>, Error> data)
+        public Task Handle(OneOf<GetAllPetResult, Error> data)
         {
             Content = data;
             return Task.CompletedTask;

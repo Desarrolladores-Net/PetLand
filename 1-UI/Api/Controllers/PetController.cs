@@ -66,7 +66,7 @@ namespace Api.Controllers
         {
             await GetPetsCase.Handle(skip, province, municipality);
 
-            var result = ((IPresenter<OneOf<List<GetPetResult>, Error>>)GetPetsOutport).Content;
+            var result = ((IPresenter<OneOf<GetAllPetResult, Error>>)GetPetsOutport).Content;
 
             return result.Match(
             getPetResult => Ok(getPetResult),
