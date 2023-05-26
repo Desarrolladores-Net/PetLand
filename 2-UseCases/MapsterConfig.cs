@@ -20,8 +20,7 @@ namespace UseCases
         {
             TypeAdapterConfig<RegisterDTO, User>.NewConfig().Map(dest => dest.Id, () => Guid.NewGuid().ToString());
             TypeAdapterConfig<User, RegisterResult>.NewConfig();
-            TypeAdapterConfig<Pet, GetPetResult>.NewConfig()
-            .Map(dest => dest.Address, src => $"{src.Address.StreetName}, {src.Address.Municipe}, {src.Address.Province}, {src.Address.MoreDetails}");
+            TypeAdapterConfig<Pet, GetPetResult>.NewConfig();
             TypeAdapterConfig<CreatePetDTO, Pet>.NewConfig()
             .Map(dest => dest.Id, () => Guid.NewGuid().ToString())
             .Map(dest => dest.Address, source => new Address()

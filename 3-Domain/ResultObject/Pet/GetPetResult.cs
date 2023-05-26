@@ -10,10 +10,7 @@ namespace Domain.ResultObject.Pet
         public string Id { get; set; }
         public string? Fullname { get; set; }
         public int? Age { get; set; }
-        public string Address { get; set; }
         public string? Description { get; set; }
-        public bool WasAdopted { get; set; }
-        public DateTime AdoptionDate { get; set; }
         public string PhotoPath { get; set; }
     }
 }
