@@ -24,7 +24,8 @@ namespace Infra
             services.AddScoped<IPetRepository, PetsReportedRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IFileManager, FileManager>();
-
+            services.AddScoped<IFormRepository, FormRepository>();
+            services.AddScoped<IQuestionRepository, QuestionRepository>();
 
             return services;
         }

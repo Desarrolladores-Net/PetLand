@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Presenters.Form;
 using Presenters.Pet;
 using Presenters.Pet;
 using Presenters.User;
@@ -20,6 +21,8 @@ namespace Presenters
             services.AddScoped<IRegisterUserOutport, RegisterUserPresenter>();
             services.AddScoped<IGetPetsOutport, GetPetsPresenter>();
             services.AddScoped<ICreatePetOutport, CreatePetPresenter>();
+            services.AddScoped<ICreateFormOutport, CreateFormPresenter>();
+
             return services;
         }
     }

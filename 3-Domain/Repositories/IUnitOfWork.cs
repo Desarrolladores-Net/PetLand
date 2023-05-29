@@ -10,6 +10,8 @@ namespace Domain.Repositories
         IUserRepository UserRepository { get; }
         IPetRepository PetRepository { get; }
         IAddressRepository AddressRepository { get; }
+        IFormRepository FormRepository {get;}
+        IQuestionRepository QuestionRepository {get;}
         Task SaveAsync();
     }
 }

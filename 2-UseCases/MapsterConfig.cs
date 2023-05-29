@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.DTO;
+using Domain.DTO.Form;
 using Domain.DTO.Pet;
 using Domain.DTO.User;
 using Domain.Entity;
@@ -32,6 +33,8 @@ namespace UseCases
                 MoreDetails = source.MoreDetails
             });
             TypeAdapterConfig<Pet, CreatePetResult>.NewConfig();
+            TypeAdapterConfig<CreateFormDTO, Form>.NewConfig()
+            .Map(x => x.Id, () => Guid.NewGuid().ToString());
             
         }
     }

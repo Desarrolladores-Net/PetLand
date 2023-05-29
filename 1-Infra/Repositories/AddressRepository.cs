@@ -17,7 +17,7 @@ namespace Infra.Repositories
         {
             _context = context;
         }
-        public async Task AddAsync(Address entity) => await _context.AddAsync(entity);
+        public async Task AddAsync(Address entity) => _context.AddAsync(entity).AsTask();
 
         public async Task<Address> Delete(int id)
         {

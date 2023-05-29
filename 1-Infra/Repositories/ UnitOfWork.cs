@@ -19,13 +19,16 @@ namespace Infra.Repositories
 
         private AppDbContext Context;
 
-        public UnitOfWork(IPetRepository Pet, IUserRepository User, IAddressRepository Address, AppDbContext _context)
+        public UnitOfWork(IPetRepository petRepository, IUserRepository userRepository, IAddressRepository addressRepository, IFormRepository formRepository, IQuestionRepository questionRepository, AppDbContext context)
         {
-            PetRepository = Pet;
-            UserRepository = User;
-            AddressRepository = Address;
-            Context = _context;
+            PetRepository = petRepository;
+            UserRepository = userRepository;
+            AddressRepository = addressRepository;
+            FormRepository = formRepository;
+            QuestionRepository = questionRepository;
+            Context = context;
         }
+
         public async Task SaveAsync()
         {
             try
