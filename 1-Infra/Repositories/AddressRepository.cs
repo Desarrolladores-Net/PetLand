@@ -31,6 +31,13 @@ namespace Infra.Repositories
             return _context.Address.Skip(skip).Take(10).ToListAsync();
         }
 
+        public Task<List<Address>> GetAll()
+        {
+            return _context.Address.ToListAsync();
+        }
+
+    
+
         public Task<Address> GetOne(int id) => _context.Address.FindAsync(id).AsTask()!;
 
         public Task UpdateAsync(Address entity)

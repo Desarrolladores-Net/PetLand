@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230517213431_hbhb")]
-    partial class hbhb
+    [Migration("20230529212115_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,6 @@ namespace Infra.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("MoreDetails")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Municipe")
@@ -56,6 +55,20 @@ namespace Infra.Migrations
                         .IsUnique();
 
                     b.ToTable("Address");
+                });
+
+            modelBuilder.Entity("Domain.Entity.Form", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Form");
                 });
 
             modelBuilder.Entity("Domain.Entity.Pet", b =>
@@ -91,6 +104,29 @@ namespace Infra.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("PetsReported");
+                });
+
+            modelBuilder.Entity("Domain.Entity.Question", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FormId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("TypeQuestion")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FormId");
+
+                    b.ToTable("Question");
                 });
 
             modelBuilder.Entity("Domain.Entity.User", b =>
@@ -139,6 +175,20 @@ namespace Infra.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entity.Question", b =>
+                {
+                    b.HasOne("Domain.Entity.Form", null)
+                        .WithMany("Question")
+                        .HasForeignKey("FormId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entity.Form", b =>
+                {
+                    b.Navigation("Question");
                 });
 
             modelBuilder.Entity("Domain.Entity.Pet", b =>

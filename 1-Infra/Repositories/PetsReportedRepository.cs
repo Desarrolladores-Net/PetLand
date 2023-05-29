@@ -67,5 +67,11 @@ namespace Infra.Repositories
             _context.Update(entity);
             return Task.CompletedTask;
         }
+
+
+        public Task<List<Pet>> GetAll()
+        {
+            return _context.PetsReported.ToListAsync();
+        }
     }
 }

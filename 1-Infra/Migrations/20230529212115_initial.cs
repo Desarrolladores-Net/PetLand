@@ -12,6 +12,18 @@ namespace Infra.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Form",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Form", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
@@ -28,6 +40,26 @@ namespace Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Question",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    FormId = table.Column<string>(type: "text", nullable: false),
+                    Message = table.Column<string>(type: "text", nullable: false),
+                    TypeQuestion = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Question", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Question_Form_FormId",
+                        column: x => x.FormId,
+                        principalTable: "Form",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PetsReported",
                 columns: table => new
                 {
@@ -37,7 +69,8 @@ namespace Infra.Migrations
                     Age = table.Column<int>(type: "integer", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     WasAdopted = table.Column<bool>(type: "boolean", nullable: false),
-                    AdoptionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    AdoptionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    PhotoPath = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,7 +92,7 @@ namespace Infra.Migrations
                     Province = table.Column<string>(type: "text", nullable: false),
                     Municipe = table.Column<string>(type: "text", nullable: false),
                     StreetName = table.Column<string>(type: "text", nullable: false),
-                    MoreDetails = table.Column<string>(type: "text", nullable: false)
+                    MoreDetails = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -82,6 +115,11 @@ namespace Infra.Migrations
                 name: "IX_PetsReported_UserId",
                 table: "PetsReported",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Question_FormId",
+                table: "Question",
+                column: "FormId");
         }
 
         /// <inheritdoc />
@@ -91,7 +129,13 @@ namespace Infra.Migrations
                 name: "Address");
 
             migrationBuilder.DropTable(
+                name: "Question");
+
+            migrationBuilder.DropTable(
                 name: "PetsReported");
+
+            migrationBuilder.DropTable(
+                name: "Form");
 
             migrationBuilder.DropTable(
                 name: "User");

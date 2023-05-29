@@ -12,9 +12,10 @@ namespace Infra.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         public IPetRepository PetRepository { get; }
-
         public IUserRepository UserRepository { get; }
         public IAddressRepository AddressRepository { get; }
+        public IFormRepository FormRepository { get;}
+        public IQuestionRepository QuestionRepository { get; set; }
 
         private AppDbContext Context;
 

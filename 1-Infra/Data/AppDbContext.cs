@@ -13,6 +13,8 @@ namespace Infra.Data
         public DbSet<User> User { get; set; }
         public DbSet<Pet> PetsReported { get; set; }
         public DbSet<Address> Address { get; set; }
+        public DbSet<Form> Form { get; set; }
+        public DbSet<Question> Question { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 

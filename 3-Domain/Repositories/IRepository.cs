@@ -13,5 +13,7 @@ namespace Domain.Repositories
         Task<T> Delete(int id);
         Task<T> GetOne(int id);
         Task<List<T>> GetAll(int skip);
+        Task<List<T>> GetAll();
+
     }
 }
