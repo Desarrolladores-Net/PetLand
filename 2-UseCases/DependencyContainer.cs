@@ -20,6 +20,7 @@ namespace UseCases
             services.AddScoped<ICreateFormInport, CreateForm>();
             services.AddScoped<IGetFormsInport, GetForms>();
             services.AddScoped<IUpdateFormInport, UpdateForm>();
+            services.AddScoped<IActiveFormInport, ActiveForm>();
 
             services.RegisterMapsterConfiguration();
 

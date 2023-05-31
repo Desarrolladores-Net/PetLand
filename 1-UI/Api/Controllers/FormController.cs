@@ -23,8 +23,10 @@ namespace Api.Controllers
         private IGetFormsOutport _getFormsOutport;
         private IUpdateFormInport _updateFormInport;
         private IUpdateFormOutport _updateFormOutport;
+        private IActiveFormInport _activeFormInport;
+        private IActiveFormOutport _activeFormOutport;
 
-        public FormController(ICreateFormInport createFormInport, ICreateFormOutport createFormOutport, IGetFormsInport getFormsInport, IGetFormsOutport getFormsOutport, IUpdateFormInport updateFormInport, IUpdateFormOutport updateFormOutport)
+        public FormController(ICreateFormInport createFormInport, ICreateFormOutport createFormOutport, IGetFormsInport getFormsInport, IGetFormsOutport getFormsOutport, IUpdateFormInport updateFormInport, IUpdateFormOutport updateFormOutport, IActiveFormInport activeFormInport, IActiveFormOutport activeFormOutport)
         {
             _createFormInport = createFormInport;
             _createFormOutport = createFormOutport;
@@ -32,6 +34,8 @@ namespace Api.Controllers
             _getFormsOutport = getFormsOutport;
             _updateFormInport = updateFormInport;
             _updateFormOutport = updateFormOutport;
+            _activeFormInport = activeFormInport;
+            _activeFormOutport = activeFormOutport;
         }
 
         [HttpPost]
@@ -110,6 +114,32 @@ namespace Api.Controllers
                     )
                 });
 
+
+        }
+
+        [HttpPut("active")]
+        public async Task<IActionResult> ActiveFormEndpoint(ActiveFormDTO dto)
+        {
+            await _activeFormInport.Handle(dto);
+
+            var result = ((IPresenter<OneOf<ActiveFormResult, Error>>)_activeFormOutport).Content;
+
+            return result.Match(
+                activeFormResult => Ok(activeFormResult),
+                error => error switch
+                {
+                     Error { Reason: ErrorReason.FailDatabase } => Problem(
+                        detail: error.Message,
+                        statusCode: 500,
+                        title: "Server Error"
+                    ),
+                    _ => Problem(
+                        detail: error.Message,
+                        statusCode: 500,
+                        title: "Server error"
+                    )
+                }
+            );
 
         }
 
