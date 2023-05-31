@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain;
 using Domain.DTO.Form;
+using Domain.Entity;
 using Domain.ResultObject.Form;
 using Microsoft.AspNetCore.Mvc;
 using OneOf;
@@ -25,8 +26,10 @@ namespace Api.Controllers
         private IUpdateFormOutport _updateFormOutport;
         private IActiveFormInport _activeFormInport;
         private IActiveFormOutport _activeFormOutport;
+        private IDeleteFormInport _deleteFormInport;
+        private IDeleteFormOutport _deleteFormOutport;
 
-        public FormController(ICreateFormInport createFormInport, ICreateFormOutport createFormOutport, IGetFormsInport getFormsInport, IGetFormsOutport getFormsOutport, IUpdateFormInport updateFormInport, IUpdateFormOutport updateFormOutport, IActiveFormInport activeFormInport, IActiveFormOutport activeFormOutport)
+        public FormController(ICreateFormInport createFormInport, ICreateFormOutport createFormOutport, IGetFormsInport getFormsInport, IGetFormsOutport getFormsOutport, IUpdateFormInport updateFormInport, IUpdateFormOutport updateFormOutport, IActiveFormInport activeFormInport, IActiveFormOutport activeFormOutport, IDeleteFormInport deleteFormInport, IDeleteFormOutport deleteFormOutport)
         {
             _createFormInport = createFormInport;
             _createFormOutport = createFormOutport;
@@ -36,6 +39,8 @@ namespace Api.Controllers
             _updateFormOutport = updateFormOutport;
             _activeFormInport = activeFormInport;
             _activeFormOutport = activeFormOutport;
+            _deleteFormInport = deleteFormInport;
+            _deleteFormOutport = deleteFormOutport;
         }
 
         [HttpPost]
@@ -126,6 +131,33 @@ namespace Api.Controllers
 
             return result.Match(
                 activeFormResult => Ok(activeFormResult),
+                error => error switch
+                {
+                     Error { Reason: ErrorReason.FailDatabase } => Problem(
+                        detail: error.Message,
+                        statusCode: 500,
+                        title: "Server Error"
+                    ),
+                    _ => Problem(
+                        detail: error.Message,
+                        statusCode: 500,
+                        title: "Server error"
+                    )
+                }
+            );
+
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteFormEndpoint(string id)
+        {
+            await _deleteFormInport.Handle(id);
+
+            var result = ((IPresenter<OneOf<Form, Error>>)_deleteFormOutport).Content;
+
+
+            return result.Match(
+                deleteFormResult => Ok(deleteFormResult),
                 error => error switch
                 {
                      Error { Reason: ErrorReason.FailDatabase } => Problem(

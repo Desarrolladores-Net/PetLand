@@ -21,7 +21,7 @@ namespace UseCases
             services.AddScoped<IGetFormsInport, GetForms>();
             services.AddScoped<IUpdateFormInport, UpdateForm>();
             services.AddScoped<IActiveFormInport, ActiveForm>();
-
+            services.AddScoped<IDeleteFormInport, DeleteForm>();
             services.RegisterMapsterConfiguration();
 
             return services;

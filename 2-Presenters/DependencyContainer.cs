@@ -25,7 +25,7 @@ namespace Presenters
             services.AddScoped<IGetFormsOutport, GetFormsPresenter>();
             services.AddScoped<IUpdateFormOutport, UpdateFormPresenter>();
             services.AddScoped<IActiveFormOutport, ActiveFormPresenter>();
-
+            services.AddScoped<IDeleteFormOutport, DeleteFormPresenter>();
             return services;
         }
     }
