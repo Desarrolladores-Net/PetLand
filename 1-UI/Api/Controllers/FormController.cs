@@ -19,11 +19,15 @@ namespace Api.Controllers
     {
         private ICreateFormInport _createFormInport;
         private ICreateFormOutport _createFormOutport;
+        private IGetFormsInport _getFormsInport;
+        private IGetFormsOutport _getFormsOutport;
 
-        public FormController(ICreateFormInport createFormInport, ICreateFormOutport creFormOutport)
+        public FormController(ICreateFormInport createFormInport, ICreateFormOutport createFormOutport, IGetFormsInport getFormsInport, IGetFormsOutport getFormsOutport)
         {
             _createFormInport = createFormInport;
-            _createFormOutport = creFormOutport;
+            _createFormOutport = createFormOutport;
+            _getFormsInport = getFormsInport;
+            _getFormsOutport = getFormsOutport;
         }
 
         [HttpPost]
@@ -48,6 +52,32 @@ namespace Api.Controllers
                     title: "Server Error"
                 )
 
+                }
+            );
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetFormsEndpoint()
+        {
+            await _getFormsInport.Handle();
+
+            var result =  ((IPresenter<OneOf<GetAllFormsResult, Error>>)_getFormsOutport).Content;
+
+            return result.Match(
+                getFormsResult => Ok(getFormsResult),
+                error => error switch
+                {
+                    Error {Reason: ErrorReason.FailDatabase } => Problem(
+                        detail: error.Message,
+                        statusCode: 500,
+                        title: "Server error"
+                    ),
+                    _ => Problem(
+                        detail: error.Message,
+                        statusCode: 500,
+                        title: "Server error"
+                    )
                 }
             );
 

@@ -22,6 +22,7 @@ namespace Presenters
             services.AddScoped<IGetPetsOutport, GetPetsPresenter>();
             services.AddScoped<ICreatePetOutport, CreatePetPresenter>();
             services.AddScoped<ICreateFormOutport, CreateFormPresenter>();
+            services.AddScoped<IGetFormsOutport, GetFormsPresenter>();
 
             return services;
         }

@@ -8,6 +8,7 @@ using Domain.DTO.Pet;
 using Domain.DTO.User;
 using Domain.Entity;
 using Domain.ResultObject;
+using Domain.ResultObject.Form;
 using Domain.ResultObject.Pet;
 using Domain.ResultObject.User;
 using Mapster;
@@ -35,6 +36,7 @@ namespace UseCases
             TypeAdapterConfig<Pet, CreatePetResult>.NewConfig();
             TypeAdapterConfig<CreateFormDTO, Form>.NewConfig()
             .Map(x => x.Id, () => Guid.NewGuid().ToString());
+            TypeAdapterConfig<Form, GetFormsResult>.NewConfig();
             
         }
     }

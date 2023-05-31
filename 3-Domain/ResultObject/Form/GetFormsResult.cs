@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Domain.Entity
+namespace Domain.ResultObject.Form
 {
-    public class Form
+    public class GetFormsResult
     {
         public string Id { get; set; }
         public string Name { get; set; }
         public bool Active { get; set; }
-        public List<Question> Question { get; set; }
     }
 }
