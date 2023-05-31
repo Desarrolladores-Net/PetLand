@@ -24,7 +24,7 @@ namespace Infra.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task<Form> Delete(int id)
+        public async Task<Form> Delete(string id)
         {
             var form = await _context.Form.FindAsync(id);
             _context.Remove(form);
@@ -41,14 +41,15 @@ namespace Infra.Repositories
             return _context.Form.ToListAsync();
         }
 
-        public Task<Form> GetOne(int id)
+        public Task<Form> GetOne(string id)
         {
-            throw new NotImplementedException();
+            return _context.Form.FindAsync(id).AsTask();
         }
 
         public Task UpdateAsync(Form entity)
         {
-            throw new NotImplementedException();
+            _context.Update(entity);
+            return Task.CompletedTask;
         }
 
     }

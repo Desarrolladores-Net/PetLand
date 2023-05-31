@@ -35,7 +35,7 @@ namespace Infra.Repositories
             .CountAsync();
         }
 
-        public async Task<Pet> Delete(int id)
+        public async Task<Pet> Delete(string id)
         {
             var pet = await _context.PetsReported.FindAsync(id);
             _context.Remove(pet!);
@@ -59,7 +59,7 @@ namespace Infra.Repositories
             .Skip(skip).Take(10).ToListAsync();
         }
 
-        public Task<Pet> GetOne(int id) => _context.PetsReported.FindAsync(id).AsTask()!;
+        public Task<Pet> GetOne(string id) => _context.PetsReported.FindAsync(id).AsTask()!;
 
 
         public Task UpdateAsync(Pet entity)

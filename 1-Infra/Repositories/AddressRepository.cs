@@ -19,7 +19,7 @@ namespace Infra.Repositories
         }
         public async Task AddAsync(Address entity) => _context.AddAsync(entity).AsTask();
 
-        public async Task<Address> Delete(int id)
+        public async Task<Address> Delete(string id)
         {
             var address = await _context.Address.FindAsync(id);
             _context.Remove(address!);
@@ -38,7 +38,7 @@ namespace Infra.Repositories
 
     
 
-        public Task<Address> GetOne(int id) => _context.Address.FindAsync(id).AsTask()!;
+        public Task<Address> GetOne(string id) => _context.Address.FindAsync(id).AsTask()!;
 
         public Task UpdateAsync(Address entity)
         {

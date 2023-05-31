@@ -21,13 +21,17 @@ namespace Api.Controllers
         private ICreateFormOutport _createFormOutport;
         private IGetFormsInport _getFormsInport;
         private IGetFormsOutport _getFormsOutport;
+        private IUpdateFormInport _updateFormInport;
+        private IUpdateFormOutport _updateFormOutport;
 
-        public FormController(ICreateFormInport createFormInport, ICreateFormOutport createFormOutport, IGetFormsInport getFormsInport, IGetFormsOutport getFormsOutport)
+        public FormController(ICreateFormInport createFormInport, ICreateFormOutport createFormOutport, IGetFormsInport getFormsInport, IGetFormsOutport getFormsOutport, IUpdateFormInport updateFormInport, IUpdateFormOutport updateFormOutport)
         {
             _createFormInport = createFormInport;
             _createFormOutport = createFormOutport;
             _getFormsInport = getFormsInport;
             _getFormsOutport = getFormsOutport;
+            _updateFormInport = updateFormInport;
+            _updateFormOutport = updateFormOutport;
         }
 
         [HttpPost]
@@ -62,13 +66,13 @@ namespace Api.Controllers
         {
             await _getFormsInport.Handle();
 
-            var result =  ((IPresenter<OneOf<GetAllFormsResult, Error>>)_getFormsOutport).Content;
+            var result = ((IPresenter<OneOf<GetAllFormsResult, Error>>)_getFormsOutport).Content;
 
             return result.Match(
                 getFormsResult => Ok(getFormsResult),
                 error => error switch
                 {
-                    Error {Reason: ErrorReason.FailDatabase } => Problem(
+                    Error { Reason: ErrorReason.FailDatabase } => Problem(
                         detail: error.Message,
                         statusCode: 500,
                         title: "Server error"
@@ -80,6 +84,32 @@ namespace Api.Controllers
                     )
                 }
             );
+
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateFormEndpoint(UpdateFormDTO dto)
+        {
+            await _updateFormInport.Handle(dto);
+
+            var result = ((IPresenter<OneOf<UpdateFormResult, Error>>)_updateFormOutport).Content;
+
+            return result.Match(
+                updateFormResult => Ok(updateFormResult),
+                error => error switch
+                {
+                    Error { Reason: ErrorReason.FailDatabase } => Problem(
+                        detail: error.Message,
+                        statusCode: 500,
+                        title: "Server Error"
+                    ),
+                    _ => Problem(
+                        detail: error.Message,
+                        statusCode: 500,
+                        title: "Server error"
+                    )
+                });
+
 
         }
 

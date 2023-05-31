@@ -37,6 +37,7 @@ namespace UseCases
             TypeAdapterConfig<CreateFormDTO, Form>.NewConfig()
             .Map(x => x.Id, () => Guid.NewGuid().ToString());
             TypeAdapterConfig<Form, GetFormsResult>.NewConfig();
+            TypeAdapterConfig<Form, UpdateFormResult>.NewConfig();
             
         }
     }

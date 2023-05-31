@@ -19,7 +19,7 @@ namespace Infra.Repositories
         }
         public async Task AddAsync(User entity) => _context.AddAsync(entity);
 
-        public async Task<User> Delete(int id)
+        public async Task<User> Delete(string id)
         {
             var user = await _context.User.FindAsync(id);
             _context.Remove(user!);
@@ -38,7 +38,7 @@ namespace Infra.Repositories
            return _context.User.ToListAsync();
         }
 
-        public Task<User> GetOne(int id) => _context.User.FindAsync(id).AsTask()!;
+        public Task<User> GetOne(string id) => _context.User.FindAsync(id).AsTask()!;
 
 
         public Task UpdateAsync(User entity)

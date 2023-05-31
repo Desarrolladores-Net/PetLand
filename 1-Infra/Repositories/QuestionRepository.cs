@@ -19,7 +19,7 @@ namespace Infra.Repositories
 
         }
 
-        public async Task<Question> Delete(int id)
+        public async Task<Question> Delete(string id)
         {
             var result = await _context.Question.FindAsync(id);
             _context.Remove(result);
@@ -36,9 +36,9 @@ namespace Infra.Repositories
             return _context.Question.ToListAsync();
         }
 
-        public Task<Question> GetOne(int id)
+        public async Task<Question> GetOne(string id)
         {
-            return _context.Question.FindAsync(id).AsTask();
+            return _context.Question.FindAsync(id).AsTask().Result;
         }
 
         public Task UpdateAsync(Question entity)

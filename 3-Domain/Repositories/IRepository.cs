@@ -10,8 +10,8 @@ namespace Domain.Repositories
     {
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
-        Task<T> Delete(int id);
-        Task<T> GetOne(int id);
+        Task<T> Delete(string id);
+        Task<T> GetOne(string id);
         Task<List<T>> GetAll(int skip);
         Task<List<T>> GetAll();
 
