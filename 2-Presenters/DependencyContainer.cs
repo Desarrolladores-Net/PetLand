@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Presenters.Form;
 using Presenters.Pet;
 using Presenters.Pet;
+using Presenters.Question;
 using Presenters.User;
 using UseCases.Case;
 using UseCases.Case;
@@ -26,6 +27,7 @@ namespace Presenters
             services.AddScoped<IUpdateFormOutport, UpdateFormPresenter>();
             services.AddScoped<IActiveFormOutport, ActiveFormPresenter>();
             services.AddScoped<IDeleteFormOutport, DeleteFormPresenter>();
+            services.AddScoped<ICreateQuestionOutport, CreateQuestionPresenter>();
             return services;
         }
     }

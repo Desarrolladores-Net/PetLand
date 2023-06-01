@@ -13,10 +13,14 @@ namespace Infra.Repositories
     {
         private AppDbContext _context;
 
+        public QuestionRepository(AppDbContext context)
+        {
+            _context = context;
+        }
+
         public Task AddAsync(Question entity)
         {
             return _context.Question.AddAsync(entity).AsTask();
-
         }
 
         public async Task<Question> Delete(string id)
