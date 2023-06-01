@@ -24,8 +24,10 @@ namespace Api.Controllers
         private IGetQuestionOutport _getQuestionOutport;
         private IDeleteQuestionInport _deleteQuestionInport;
         private IDeleteQuestionOutport _deleteQuestionOutport;
+        private IUpdateQuestionInport _updateInport;
+        private IUpdateQuestionOutport _updateOutport;
 
-        public QuestionController(ICreateQuestionInport createQuestionInport, ICreateQuestionOutport createQuestionOutport, IGetQuestionInport getQuestionInport, IGetQuestionOutport getQuestionOutport, IDeleteQuestionInport deleteQuestionInport, IDeleteQuestionOutport deleteQuestionOutport)
+        public QuestionController(ICreateQuestionInport createQuestionInport, ICreateQuestionOutport createQuestionOutport, IGetQuestionInport getQuestionInport, IGetQuestionOutport getQuestionOutport, IDeleteQuestionInport deleteQuestionInport, IDeleteQuestionOutport deleteQuestionOutport, IUpdateQuestionInport updateInport, IUpdateQuestionOutport updateOutport)
         {
             _createQuestionInport = createQuestionInport;
             _createQuestionOutport = createQuestionOutport;
@@ -33,6 +35,8 @@ namespace Api.Controllers
             _getQuestionOutport = getQuestionOutport;
             _deleteQuestionInport = deleteQuestionInport;
             _deleteQuestionOutport = deleteQuestionOutport;
+            _updateInport = updateInport;
+            _updateOutport = updateOutport;
         }
 
         [HttpPost]
@@ -112,6 +116,34 @@ namespace Api.Controllers
             });
 
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Handle(UpdateQuestionDTO dto)
+        {
+
+            await _updateInport.Handle(dto);
+
+            var result = ((IPresenter<OneOf<GetQuestionResult, Error>>)_updateOutport).Content;
+
+            return result.Match(
+                updateQuestionResult => Ok(updateQuestionResult),
+                error => error switch
+            {
+                Error { Reason: ErrorReason.FailDatabase } => Problem(
+                    detail: error.Message,
+                    statusCode: 500,
+                    title: "Server error"
+                ),
+                _ => Problem(
+                   detail: error.Message,
+                   statusCode: 500,
+                   title: "Server Error"
+               )
+            });
+
+
+        }
+
 
     }
 }

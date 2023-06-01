@@ -30,6 +30,7 @@ namespace Presenters
             services.AddScoped<ICreateQuestionOutport, CreateQuestionPresenter>();
             services.AddScoped<IGetQuestionOutport, GetQuestionPresenter>();
             services.AddScoped<IDeleteQuestionOutport, DeleteQuestionPresenter>();
+            services.AddScoped<IUpdateQuestionOutport, UpdateQuestionPresenter>();
 
             return services;
         }

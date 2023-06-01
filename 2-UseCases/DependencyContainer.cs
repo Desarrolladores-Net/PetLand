@@ -13,7 +13,7 @@ namespace UseCases
 
         public static IServiceCollection AddUseCases(this IServiceCollection services)
         {
-
+            services.RegisterMapsterConfiguration();
             services.AddScoped<IRegisterUserInport, RegisterUser>();
             services.AddScoped<IGetPetsInport, GetPet>();
             services.AddScoped<ICreatePetInport, CreatePet>();
@@ -25,7 +25,8 @@ namespace UseCases
             services.AddScoped<ICreateQuestionInport, CreateQuestion>();
             services.AddScoped<IGetQuestionInport, GetQuestion>();
             services.AddScoped<IDeleteQuestionInport, DeleteQuestion>();
-            services.RegisterMapsterConfiguration();
+            services.AddScoped<IUpdateQuestionInport, UpdateQuestion>();
+
 
             return services;
         }
