@@ -22,13 +22,17 @@ namespace Api.Controllers
         private ICreateQuestionOutport _createQuestionOutport;
         private IGetQuestionInport _getQuestionInport;
         private IGetQuestionOutport _getQuestionOutport;
+        private IDeleteQuestionInport _deleteQuestionInport;
+        private IDeleteQuestionOutport _deleteQuestionOutport;
 
-        public QuestionController(ICreateQuestionInport createQuestionInport, ICreateQuestionOutport createQuestionOutport, IGetQuestionInport getQuestionInport, IGetQuestionOutport getQuestionOutport)
+        public QuestionController(ICreateQuestionInport createQuestionInport, ICreateQuestionOutport createQuestionOutport, IGetQuestionInport getQuestionInport, IGetQuestionOutport getQuestionOutport, IDeleteQuestionInport deleteQuestionInport, IDeleteQuestionOutport deleteQuestionOutport)
         {
             _createQuestionInport = createQuestionInport;
             _createQuestionOutport = createQuestionOutport;
             _getQuestionInport = getQuestionInport;
             _getQuestionOutport = getQuestionOutport;
+            _deleteQuestionInport = deleteQuestionInport;
+            _deleteQuestionOutport = deleteQuestionOutport;
         }
 
         [HttpPost]
@@ -67,6 +71,32 @@ namespace Api.Controllers
 
             return result.Match(
                 getQuestionResult => Ok(getQuestionResult),
+                error => error switch
+            {
+                Error { Reason: ErrorReason.FailDatabase } => Problem(
+                    detail: error.Message,
+                    statusCode: 500,
+                    title: "Server error"
+                ),
+                _ => Problem(
+                   detail: error.Message,
+                   statusCode: 500,
+                   title: "Server Error"
+               )
+            });
+
+        }
+
+        [HttpDelete("{questionId}")]
+        public async Task<IActionResult> Handle(string questionId)
+        {
+            await _deleteQuestionInport.Handle(questionId);
+
+            var result = ((IPresenter<OneOf<GetQuestionResult, Error>>)_deleteQuestionOutport).Content;
+
+
+            return result.Match(
+                deleteQuestionResult => Ok(deleteQuestionResult),
                 error => error switch
             {
                 Error { Reason: ErrorReason.FailDatabase } => Problem(

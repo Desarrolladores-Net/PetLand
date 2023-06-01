@@ -24,6 +24,7 @@ namespace UseCases
             services.AddScoped<IDeleteFormInport, DeleteForm>();
             services.AddScoped<ICreateQuestionInport, CreateQuestion>();
             services.AddScoped<IGetQuestionInport, GetQuestion>();
+            services.AddScoped<IDeleteQuestionInport, DeleteQuestion>();
             services.RegisterMapsterConfiguration();
 
             return services;
