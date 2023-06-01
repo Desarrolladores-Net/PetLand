@@ -40,6 +40,11 @@ namespace Infra.Repositories
             return _context.Question.ToListAsync();
         }
 
+        public Task<List<Question>> GetAll(string formId)
+        {
+            return _context.Question.Where(x => x.FormId == formId).ToListAsync();
+        }
+
         public async Task<Question> GetOne(string id)
         {
             return _context.Question.FindAsync(id).AsTask().Result;

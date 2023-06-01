@@ -11,6 +11,7 @@ using Domain.Entity;
 using Domain.ResultObject;
 using Domain.ResultObject.Form;
 using Domain.ResultObject.Pet;
+using Domain.ResultObject.Question;
 using Domain.ResultObject.User;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,6 +43,7 @@ namespace UseCases
             TypeAdapterConfig<Form, ActiveFormResult>.NewConfig();
             TypeAdapterConfig<CreateQuestionDTO, Question>.NewConfig()
             .Map(dest => dest.Id, () => Guid.NewGuid().ToString());
+            TypeAdapterConfig<Question, GetQuestionResult>.NewConfig();
             
         }
     }
