@@ -31,7 +31,7 @@ namespace UseCases.Case
 
                 GetAllFormsResult forms = new()
                 {
-                    Data = result,
+                    Data = result.OrderBy(x => x.Name).ToList(),
                     Count = result.Count
                 };
 
