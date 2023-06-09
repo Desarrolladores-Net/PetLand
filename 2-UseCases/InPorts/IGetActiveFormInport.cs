@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Entity;
 
-namespace Domain.Repositories
+namespace UseCases.InPorts
 {
-    public interface IFormRepository : IRepository<Form>
+    public interface IGetActiveFormInport
     {
-        Task<Form> GetActive();
+        Task Handle();
     }
 }

@@ -28,8 +28,10 @@ namespace Api.Controllers
         private IActiveFormOutport _activeFormOutport;
         private IDeleteFormInport _deleteFormInport;
         private IDeleteFormOutport _deleteFormOutport;
+        private IGetActiveFormInport _getActiveFormInport;
+        private IGetActiveFormOutport _getActiveFormOutport;
 
-        public FormController(ICreateFormInport createFormInport, ICreateFormOutport createFormOutport, IGetFormsInport getFormsInport, IGetFormsOutport getFormsOutport, IUpdateFormInport updateFormInport, IUpdateFormOutport updateFormOutport, IActiveFormInport activeFormInport, IActiveFormOutport activeFormOutport, IDeleteFormInport deleteFormInport, IDeleteFormOutport deleteFormOutport)
+        public FormController(ICreateFormInport createFormInport, ICreateFormOutport createFormOutport, IGetFormsInport getFormsInport, IGetFormsOutport getFormsOutport, IUpdateFormInport updateFormInport, IUpdateFormOutport updateFormOutport, IActiveFormInport activeFormInport, IActiveFormOutport activeFormOutport, IDeleteFormInport deleteFormInport, IDeleteFormOutport deleteFormOutport, IGetActiveFormInport getActiveFormInport, IGetActiveFormOutport getActiveFormOutport)
         {
             _createFormInport = createFormInport;
             _createFormOutport = createFormOutport;
@@ -41,6 +43,8 @@ namespace Api.Controllers
             _activeFormOutport = activeFormOutport;
             _deleteFormInport = deleteFormInport;
             _deleteFormOutport = deleteFormOutport;
+            _getActiveFormInport = getActiveFormInport;
+            _getActiveFormOutport = getActiveFormOutport;
         }
 
         [HttpPost]
@@ -158,6 +162,34 @@ namespace Api.Controllers
 
             return result.Match(
                 deleteFormResult => Ok(deleteFormResult),
+                error => error switch
+                {
+                     Error { Reason: ErrorReason.FailDatabase } => Problem(
+                        detail: error.Message,
+                        statusCode: 500,
+                        title: "Server Error"
+                    ),
+                    _ => Problem(
+                        detail: error.Message,
+                        statusCode: 500,
+                        title: "Server error"
+                    )
+                }
+            );
+
+        }
+
+        [HttpGet("active")]
+        public async Task<IActionResult> GetActiveFormEndpoint()
+        {
+            await _getActiveFormInport.Handle();
+
+            var result = ((IPresenter<OneOf<Form, Error>>)_getActiveFormOutport).Content;
+
+            return result.Match(
+                getActiveFormResult => {
+                    return Ok(getActiveFormResult);
+                },
                 error => error switch
                 {
                      Error { Reason: ErrorReason.FailDatabase } => Problem(

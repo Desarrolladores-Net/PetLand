@@ -31,6 +31,11 @@ namespace Infra.Repositories
             return form;
         }
 
+        public Task<Form> GetActive()
+        {
+            return _context.Form.Where(x => x.Active).Include(x => x.Question).FirstOrDefaultAsync();
+        }
+
         public Task<List<Form>> GetAll(int skip)
         {
             return _context.Form.Skip(skip).Take(10).ToListAsync();
