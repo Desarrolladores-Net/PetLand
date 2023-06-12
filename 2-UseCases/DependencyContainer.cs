@@ -27,6 +27,10 @@ namespace UseCases
             services.AddScoped<IDeleteQuestionInport, DeleteQuestion>();
             services.AddScoped<IUpdateQuestionInport, UpdateQuestion>();
             services.AddScoped<IGetActiveFormInport, GetActiveForm>();
+            services.AddScoped<ICreateApplicationInport, CreateApplication>();
+
+
+
 
             return services;
         }

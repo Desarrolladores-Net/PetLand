@@ -12,6 +12,7 @@ namespace Domain.Entity
         public string Email { get; set; }
         public string Phone { get; set; }
         public List<Pet> PetsReported { get; set; }
+        public List<Application> UserResponse { get; set; }
         public string Role { get; set; }
         public string Password { get; set; }
     }

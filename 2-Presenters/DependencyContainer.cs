@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Presenters.Application;
 using Presenters.Form;
 using Presenters.Pet;
 using Presenters.Pet;
@@ -32,7 +33,7 @@ namespace Presenters
             services.AddScoped<IDeleteQuestionOutport, DeleteQuestionPresenter>();
             services.AddScoped<IUpdateQuestionOutport, UpdateQuestionPresenter>();
             services.AddScoped<IGetActiveFormOutport, GetFormActivePresenter>();
-
+            services.AddScoped<ICreateApplicationOutport, CreateApplicationPresenter>();
             return services;
         }
     }

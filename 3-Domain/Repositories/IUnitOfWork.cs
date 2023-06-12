@@ -12,6 +12,7 @@ namespace Domain.Repositories
         IAddressRepository AddressRepository { get; }
         IFormRepository FormRepository {get;}
         IQuestionRepository QuestionRepository {get;}
+        IApplicationRepository ApplicationRepository {get;}
         Task SaveAsync();
     }
 }

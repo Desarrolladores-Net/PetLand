@@ -3,6 +3,7 @@ using System;
 using Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infra.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230612145045_application")]
+    partial class application
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,16 +54,13 @@ namespace Infra.Migrations
                     b.HasIndex("PetId")
                         .IsUnique();
 
-                    b.ToTable("Address", (string)null);
+                    b.ToTable("Address");
                 });
 
             modelBuilder.Entity("Domain.Entity.Application", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("PetId")
                         .IsRequired()
@@ -76,7 +76,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Application", (string)null);
+                    b.ToTable("Application");
                 });
 
             modelBuilder.Entity("Domain.Entity.Form", b =>
@@ -93,7 +93,7 @@ namespace Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Form", (string)null);
+                    b.ToTable("Form");
                 });
 
             modelBuilder.Entity("Domain.Entity.Pet", b =>
@@ -128,7 +128,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PetsReported", (string)null);
+                    b.ToTable("PetsReported");
                 });
 
             modelBuilder.Entity("Domain.Entity.Question", b =>
@@ -151,7 +151,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("FormId");
 
-                    b.ToTable("Question", (string)null);
+                    b.ToTable("Question");
                 });
 
             modelBuilder.Entity("Domain.Entity.User", b =>
@@ -181,7 +181,7 @@ namespace Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Domain.Entity.UserResponse", b =>
@@ -205,7 +205,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ApplicationId");
 
-                    b.ToTable("UserResponse", (string)null);
+                    b.ToTable("UserResponse");
                 });
 
             modelBuilder.Entity("Domain.Entity.Address", b =>

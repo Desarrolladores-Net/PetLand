@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.DTO;
+using Domain.DTO.Application;
 using Domain.DTO.Form;
 using Domain.DTO.Pet;
 using Domain.DTO.Question;
@@ -44,6 +45,9 @@ namespace UseCases
             TypeAdapterConfig<CreateQuestionDTO, Question>.NewConfig()
             .Map(dest => dest.Id, () => Guid.NewGuid().ToString());
             TypeAdapterConfig<Question, GetQuestionResult>.NewConfig();
+
+            TypeAdapterConfig<CreateApplicationDTO, Application>.NewConfig()
+            .Map(dest => dest.Id, Guid.NewGuid().ToString());
             
         }
     }

@@ -26,6 +26,7 @@ namespace Infra
             services.AddScoped<IFileManager, FileManager>();
             services.AddScoped<IFormRepository, FormRepository>();
             services.AddScoped<IQuestionRepository, QuestionRepository>();
+            services.AddScoped<IApplicationRepository, ApplicationRepository>();
 
             return services;
         }
