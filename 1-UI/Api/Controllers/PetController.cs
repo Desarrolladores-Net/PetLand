@@ -23,13 +23,17 @@ namespace Api.Controllers
         private IGetPetsOutport GetPetsOutport;
         private ICreatePetInport CreatePetInport;
         private ICreatePetOutport CreatePetOutport;
+        private IGetOnePetInport _getOnePetInport;
+        private IGetOnePetOutport _getOnePetOutport;
 
-        public PetController(IGetPetsInport getPetsCase, IGetPetsOutport getPetsOutport, ICreatePetInport createPetInport, ICreatePetOutport createPetOutport)
+        public PetController(IGetPetsInport getPetsCase, IGetPetsOutport getPetsOutport, ICreatePetInport createPetInport, ICreatePetOutport createPetOutport, IGetOnePetInport getOnePetInport, IGetOnePetOutport getOnePetOutport)
         {
             GetPetsCase = getPetsCase;
             GetPetsOutport = getPetsOutport;
             CreatePetInport = createPetInport;
             CreatePetOutport = createPetOutport;
+            _getOnePetInport = getOnePetInport;
+            _getOnePetOutport = getOnePetOutport;
         }
 
         [HttpPost]
@@ -83,7 +87,30 @@ namespace Api.Controllers
                    title: "Server Error"
                )
             });
+        }
 
+        [HttpGet("{userId}/{petId}")]
+        public async Task<IActionResult> GetOnePetEndpoint(string userId, string petId)
+        {
+            await _getOnePetInport.Handle(userId, petId);
+
+            var result = ((IPresenter<OneOf<GetOnePetResult, Error>>)_getOnePetOutport).Content;
+
+            return result.Match(
+           getOnePetResult => Ok(getOnePetResult),
+           error => error switch
+           {
+               Error { Reason: ErrorReason.FailDatabase } => Problem(
+                   detail: error.Message,
+                   statusCode: 500,
+                   title: "Server error"
+               ),
+               _ => Problem(
+                  detail: error.Message,
+                  statusCode: 500,
+                  title: "Server Error"
+              )
+           });
 
         }
 

@@ -8,6 +8,7 @@ namespace Domain.Repositories
 {
     public interface IApplicationRepository : IRepository<Application>
     {
-        
+        Task<Application> AmIApproved(string userId, string petId);
+        Task<bool> ExistApplication(string userId, string petId);
     }
 }

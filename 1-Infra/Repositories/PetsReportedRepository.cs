@@ -59,7 +59,7 @@ namespace Infra.Repositories
             .Skip(skip).Take(10).ToListAsync();
         }
 
-        public Task<Pet> GetOne(string id) => _context.PetsReported.FindAsync(id).AsTask()!;
+        public Task<Pet> GetOne(string id) => _context.PetsReported.Where(x => x.Id == id).Include(x => x.Address).FirstOrDefaultAsync()!;
 
 
         public Task UpdateAsync(Pet entity)
@@ -73,5 +73,7 @@ namespace Infra.Repositories
         {
             return _context.PetsReported.ToListAsync();
         }
+
+
     }
 }

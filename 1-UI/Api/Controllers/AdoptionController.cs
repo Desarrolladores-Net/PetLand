@@ -48,6 +48,11 @@ namespace Api.Controllers
                        statusCode: 500,
                        title: "Server Error"
                    ),
+                   Error { Reason: ErrorReason.AlreadyExist } => Problem(
+                       detail: error.Message,
+                       statusCode: 409,
+                       title: "Server Error"
+                   ),
                     _ => Problem(
                         detail: error.Message,
                         statusCode: 500,

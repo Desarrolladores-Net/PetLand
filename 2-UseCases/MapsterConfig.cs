@@ -45,10 +45,11 @@ namespace UseCases
             TypeAdapterConfig<CreateQuestionDTO, Question>.NewConfig()
             .Map(dest => dest.Id, () => Guid.NewGuid().ToString());
             TypeAdapterConfig<Question, GetQuestionResult>.NewConfig();
-
             TypeAdapterConfig<CreateApplicationDTO, Application>.NewConfig()
             .Map(dest => dest.Id, Guid.NewGuid().ToString());
             
+            TypeAdapterConfig<Pet,GetOnePetResult>.NewConfig();
+
         }
     }
 }

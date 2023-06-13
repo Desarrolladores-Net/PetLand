@@ -27,26 +27,36 @@ namespace UseCases.Case
         {
             try
             {
+                var exist = await _unitOfWork.ApplicationRepository.ExistApplication(dto.UserId, dto.PetId);
 
-                var entity = new Application()
+                if (!exist)
                 {
-                    Id = Guid.NewGuid().ToString(),
-                    PetId = dto.PetId,
-                    UserId = dto.UserId,
-                    Date = DateTime.UtcNow
-                };
 
-                entity.UserResponse = dto.UserResponse.Select( x => new UserResponse{
-                    ApplicationId = entity.Id,
-                    Id = Guid.NewGuid().ToString(),
-                    Question = x.Question,
-                    Response = x.Response
-                }).ToList();
-                
-                await _unitOfWork.ApplicationRepository.AddAsync(entity);
-                await _unitOfWork.SaveAsync();
+                    var entity = new Application()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        PetId = dto.PetId,
+                        UserId = dto.UserId,
+                        Date = DateTime.UtcNow
+                    };
 
-                await _outport.Handle(entity);
+                    entity.UserResponse = dto.UserResponse.Select(x => new UserResponse
+                    {
+                        ApplicationId = entity.Id,
+                        Id = Guid.NewGuid().ToString(),
+                        Question = x.Question,
+                        Response = x.Response
+                    }).ToList();
+
+                    await _unitOfWork.ApplicationRepository.AddAsync(entity);
+                    await _unitOfWork.SaveAsync();
+
+                    await _outport.Handle(entity);
+                }
+                else
+                {
+                    await _outport.Handle(new Error(ErrorReason.AlreadyExist, "Ya existe una aplicación con esta mascota"));
+                }
 
             }
             catch (System.Exception ex)

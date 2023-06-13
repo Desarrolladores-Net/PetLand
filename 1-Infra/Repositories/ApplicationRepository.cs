@@ -24,6 +24,11 @@ namespace Infra.Repositories
             return _context.Application.AddAsync(entity).AsTask();
         }
 
+        public Task<Application> AmIApproved(string userId, string petId)
+        {
+            return _context.Application.Where(x => x.UserId == userId && x.PetId == petId).FirstOrDefaultAsync();
+        }
+
         public async Task<Application> Delete(string id)
         {
             var entity = await _context.Application.FindAsync(id);
@@ -48,10 +53,16 @@ namespace Infra.Repositories
             return _context.Application.FindAsync(id).AsTask();
         }
 
+
         public Task UpdateAsync(Application entity)
         {
             _context.Application.Update(entity);
             return Task.CompletedTask;
+        }
+
+        public Task<bool> ExistApplication(string userId, string petId)
+        {
+            return _context.Application.AnyAsync(x => x.UserId == userId && x.PetId == petId);
         }
     }
 }

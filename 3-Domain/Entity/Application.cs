@@ -11,6 +11,7 @@ namespace Domain.Entity
         public string UserId { get; set; }
         public string PetId { get; set; }
         public DateTime Date { get; set; }
+        public bool Approved { get; set; }
         public List<UserResponse> UserResponse { get; set; }
 
     }
