@@ -54,6 +54,7 @@ namespace Infra.Repositories
         }
 
 
+
         public Task UpdateAsync(Application entity)
         {
             _context.Application.Update(entity);
@@ -73,6 +74,11 @@ namespace Infra.Repositories
         public Task<int> Count()
         {
             return  _context.Application.CountAsync();
+        }
+
+        public Task<Application> GetResponses(string applicationId)
+        {
+            return _context.Application.Where(x => x.Id == applicationId).Include(x => x.UserResponse).FirstOrDefaultAsync();
         }
     }
 }

@@ -24,14 +24,18 @@ namespace Api.Controllers
         private ICreateApplicationOutport _createApplicationOutport;
         private IGetApplicationsInport _getApplicationsInport;
         private IGetApplicationsOutport _getApplicationsOutport;
+        private IGetOneApplicationInport _getOneApplicationInport;
+        private IOneAppOutport _getOneApplicationOutport;
 
-        public AdoptionController(IUnitOfWork unitOfWork, ICreateApplicationInport createApplicationInport, ICreateApplicationOutport createApplicationOutport, IGetApplicationsInport getApplicationsInport, IGetApplicationsOutport getApplicationsOutport)
+        public AdoptionController(IUnitOfWork unitOfWork, ICreateApplicationInport createApplicationInport, ICreateApplicationOutport createApplicationOutport, IGetApplicationsInport getApplicationsInport, IGetApplicationsOutport getApplicationsOutport, IGetOneApplicationInport getOneApplicationInport, IOneAppOutport getOneApplicationOutport)
         {
             _unitOfWork = unitOfWork;
             _createApplicationInport = createApplicationInport;
             _createApplicationOutport = createApplicationOutport;
             _getApplicationsInport = getApplicationsInport;
             _getApplicationsOutport = getApplicationsOutport;
+            _getOneApplicationInport = getOneApplicationInport;
+            _getOneApplicationOutport = getOneApplicationOutport;
         }
 
         [HttpPost]
@@ -79,6 +83,40 @@ namespace Api.Controllers
                 createApplication =>
                 {
                     return Ok(createApplication);
+                },
+                error => error switch
+                {
+                    Error { Reason: ErrorReason.FailDatabase } => Problem(
+                       detail: error.Message,
+                       statusCode: 500,
+                       title: "Server Error"
+                   ),
+                    Error { Reason: ErrorReason.AlreadyExist } => Problem(
+                        detail: error.Message,
+                        statusCode: 409,
+                        title: "Server Error"
+                    ),
+                    _ => Problem(
+                        detail: error.Message,
+                        statusCode: 500,
+                        title: "Server error"
+                    )
+                }
+            );
+
+        }
+
+        [HttpGet("{applicationId}")]
+        public async Task<IActionResult> GetOneApplicationsEndpoint(string applicationId)
+        {
+            await _getOneApplicationInport.Handle(applicationId);
+
+            var result = ((IPresenter<OneOf<Application, Error>>)_getOneApplicationOutport).Content;
+
+            return result.Match(
+                getOneApp =>
+                {
+                    return Ok(getOneApp);
                 },
                 error => error switch
                 {

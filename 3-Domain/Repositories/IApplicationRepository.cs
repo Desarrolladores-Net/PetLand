@@ -12,5 +12,6 @@ namespace Domain.Repositories
         Task<bool> ExistApplication(string userId, string petId);
         Task<List<Application>> GetAll(int skip, ApplicationState state);
         Task<int> Count();
+        Task<Application> GetResponses(string applicationId);
     }
 }
