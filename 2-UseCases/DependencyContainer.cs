@@ -29,6 +29,7 @@ namespace UseCases
             services.AddScoped<IGetActiveFormInport, GetActiveForm>();
             services.AddScoped<ICreateApplicationInport, CreateApplication>();
             services.AddScoped<IGetOnePetInport, GetOnePet>();
+            services.AddScoped<IGetApplicationsInport, GetApplications>();
 
             return services;
         }

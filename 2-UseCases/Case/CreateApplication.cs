@@ -37,7 +37,8 @@ namespace UseCases.Case
                         Id = Guid.NewGuid().ToString(),
                         PetId = dto.PetId,
                         UserId = dto.UserId,
-                        Date = DateTime.UtcNow
+                        Date = DateTime.UtcNow,
+                        ApplicationState = ApplicationState.Pending
                     };
 
                     entity.UserResponse = dto.UserResponse.Select(x => new UserResponse

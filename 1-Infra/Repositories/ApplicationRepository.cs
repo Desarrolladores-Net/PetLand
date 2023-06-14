@@ -64,5 +64,15 @@ namespace Infra.Repositories
         {
             return _context.Application.AnyAsync(x => x.UserId == userId && x.PetId == petId);
         }
+
+        public Task<List<Application>> GetAll(int skip, ApplicationState state)
+        {
+            return _context.Application.Where(x => x.ApplicationState == state).OrderByDescending(x => x.Date).Skip(skip).ToListAsync();
+        }
+
+        public Task<int> Count()
+        {
+            return  _context.Application.CountAsync();
+        }
     }
 }

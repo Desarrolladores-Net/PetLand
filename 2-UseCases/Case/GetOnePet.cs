@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
+using Domain.Entity;
 using Domain.Repositories;
 using Domain.ResultObject.Pet;
 using Mapster;
@@ -35,11 +36,10 @@ namespace UseCases.Case
                 if(application == null)
                 {
                     result.Address = null;
-                    
                 }
                 else
                 {
-                    if(!application.Approved)
+                    if(application.ApplicationState != ApplicationState.Approved)
                     {
                         result.Address = null;
                     }

@@ -12,7 +12,7 @@ namespace Services.Time
         {
             var cubanZone = TimeZoneInfo.FindSystemTimeZoneById("Cuba Standard Time");
 
-            var timeCuba = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, cubanZone);
+            var timeCuba = TimeZoneInfo.ConvertTimeFromUtc(date, cubanZone);
 
             return timeCuba;
         }

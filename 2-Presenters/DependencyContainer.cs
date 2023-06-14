@@ -35,7 +35,8 @@ namespace Presenters
             services.AddScoped<IGetActiveFormOutport, GetFormActivePresenter>();
             services.AddScoped<ICreateApplicationOutport, CreateApplicationPresenter>();
             services.AddScoped<IGetOnePetOutport, GetOnePetPresenter>();
-            
+            services.AddScoped<IGetApplicationsOutport, GetApplicationPresenter>();
+
             return services;
         }
     }
