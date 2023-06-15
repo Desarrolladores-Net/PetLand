@@ -13,7 +13,7 @@ using UseCases.OutPorts;
 namespace UseCases.Case
 {
     public class GetOnePet : IGetOnePetInport
-    {   
+    {
         private IUnitOfWork _unitOfWork;
         private IGetOnePetOutport _outport;
 
@@ -33,15 +33,21 @@ namespace UseCases.Case
 
                 var application = await _unitOfWork.ApplicationRepository.AmIApproved(userId, petId);
 
-                if(application == null)
+                var user = await _unitOfWork.UserRepository.GetOne(userId);
+
+                if (user.Role != "Admin")
                 {
-                    result.Address = null;
-                }
-                else
-                {
-                    if(application.ApplicationState != ApplicationState.Approved)
+
+                    if (application == null)
                     {
                         result.Address = null;
+                    }
+                    else
+                    {
+                        if (application.ApplicationState != ApplicationState.Approved)
+                        {
+                            result.Address = null;
+                        }
                     }
                 }
 
@@ -50,7 +56,7 @@ namespace UseCases.Case
             }
             catch (System.Exception)
             {
-                
+
                 await _outport.Handle(new Error(ErrorReason.FailDatabase, "No se pudo conectar con la base de datos"));
             }
         }
