@@ -46,7 +46,8 @@ namespace UseCases.Case
                         ApplicationId = entity.Id,
                         Id = Guid.NewGuid().ToString(),
                         Question = x.Question,
-                        Response = x.Response
+                        Response = x.Response,
+                        Priority = x.Priority
                     }).ToList();
 
                     await _unitOfWork.ApplicationRepository.AddAsync(entity);

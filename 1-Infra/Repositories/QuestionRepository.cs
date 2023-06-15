@@ -42,7 +42,7 @@ namespace Infra.Repositories
 
         public Task<List<Question>> GetAll(string formId)
         {
-            return _context.Question.Where(x => x.FormId == formId).ToListAsync();
+            return _context.Question.Where(x => x.FormId == formId).OrderBy(x => x.Priority).ToListAsync();
         }
 
         public async Task<Question> GetOne(string id)

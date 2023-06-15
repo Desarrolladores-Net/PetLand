@@ -9,5 +9,6 @@ namespace Domain.DTO.Application
     {
         public string Question { get; set; }
         public string Response { get; set; }
+        public int Priority { get; set; }
     }
 }

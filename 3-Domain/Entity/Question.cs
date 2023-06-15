@@ -16,6 +16,7 @@ namespace Domain.Entity
         public string Id { get; set; }
         public string FormId { get; set; }
         public string Message { get; set; }
+        public string Priority { get; set; }
         public int TypeQuestion { get; set; }
     }
 }

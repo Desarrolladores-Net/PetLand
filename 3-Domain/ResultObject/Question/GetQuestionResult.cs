@@ -11,6 +11,7 @@ namespace Domain.ResultObject.Question
         public string Id { get; set; }
         public string FormId { get; set; }
         public string Message { get; set; }
+        public int Priority { get; set; }
         public TypeQuestion TypeQuestion { get; set; }
     }
 }

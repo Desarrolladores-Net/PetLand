@@ -26,6 +26,8 @@ namespace UseCases.Case
             {
                 var data = await _unitOfWork.ApplicationRepository.GetResponses(applicationId);
 
+                data.UserResponse = data.UserResponse.OrderBy(x => x.Priority).ToList();
+
                 await _outport.Handle(data);
 
             }
