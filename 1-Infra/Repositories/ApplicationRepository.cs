@@ -71,9 +71,9 @@ namespace Infra.Repositories
             return _context.Application.Where(x => x.ApplicationState == state).OrderBy(x => x.Date).Skip(skip).ToListAsync();
         }
 
-        public Task<int> Count()
+        public Task<int> Count(ApplicationState state)
         {
-            return  _context.Application.CountAsync();
+            return  _context.Application.CountAsync(x => x.ApplicationState == state);
         }
 
         public Task<Application> GetResponses(string applicationId)

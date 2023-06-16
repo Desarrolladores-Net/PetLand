@@ -11,7 +11,7 @@ namespace Domain.Repositories
         Task<Application> AmIApproved(string userId, string petId);
         Task<bool> ExistApplication(string userId, string petId);
         Task<List<Application>> GetAll(int skip, ApplicationState state);
-        Task<int> Count();
+        Task<int> Count(ApplicationState state);
         Task<Application> GetResponses(string applicationId);
     }
 }

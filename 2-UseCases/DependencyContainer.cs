@@ -31,6 +31,9 @@ namespace UseCases
             services.AddScoped<IGetOnePetInport, GetOnePet>();
             services.AddScoped<IGetApplicationsInport, GetApplications>();
             services.AddScoped<IGetOneApplicationInport, GetOneApplication>();
+            services.AddScoped<ISetApplicationStateInport, SetApplicationState>();
+
+
 
             return services;
         }

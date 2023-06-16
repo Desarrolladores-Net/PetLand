@@ -26,8 +26,10 @@ namespace Api.Controllers
         private IGetApplicationsOutport _getApplicationsOutport;
         private IGetOneApplicationInport _getOneApplicationInport;
         private IOneAppOutport _getOneApplicationOutport;
+        private ISetApplicationStateInport _setApplicationInport;
+        private ISetApplicationStateOutport _setApplicationOutport;
 
-        public AdoptionController(IUnitOfWork unitOfWork, ICreateApplicationInport createApplicationInport, ICreateApplicationOutport createApplicationOutport, IGetApplicationsInport getApplicationsInport, IGetApplicationsOutport getApplicationsOutport, IGetOneApplicationInport getOneApplicationInport, IOneAppOutport getOneApplicationOutport)
+        public AdoptionController(IUnitOfWork unitOfWork, ICreateApplicationInport createApplicationInport, ICreateApplicationOutport createApplicationOutport, IGetApplicationsInport getApplicationsInport, IGetApplicationsOutport getApplicationsOutport, IGetOneApplicationInport getOneApplicationInport, IOneAppOutport getOneApplicationOutport, ISetApplicationStateInport setApplicationInport, ISetApplicationStateOutport setApplicationOutport)
         {
             _unitOfWork = unitOfWork;
             _createApplicationInport = createApplicationInport;
@@ -36,6 +38,8 @@ namespace Api.Controllers
             _getApplicationsOutport = getApplicationsOutport;
             _getOneApplicationInport = getOneApplicationInport;
             _getOneApplicationOutport = getOneApplicationOutport;
+            _setApplicationInport = setApplicationInport;
+            _setApplicationOutport = setApplicationOutport;
         }
 
         [HttpPost]
@@ -139,6 +143,43 @@ namespace Api.Controllers
             );
 
         }
+
+        [HttpPut]
+        public async Task<IActionResult> SetApplicationStateEndpoint(SetApplicationStateDTO dto)
+        {
+            await _setApplicationInport.Handle(dto);
+
+            var result = ((IPresenter<OneOf<Application, Error>>)_setApplicationOutport).Content;
+
+            return result.Match(
+                data =>
+                {
+                    return Ok(data);
+                },
+                error => error switch
+                {
+                    Error { Reason: ErrorReason.FailDatabase } => Problem(
+                       detail: error.Message,
+                       statusCode: 500,
+                       title: "Server Error"
+                   ),
+                    Error { Reason: ErrorReason.AlreadyExist } => Problem(
+                        detail: error.Message,
+                        statusCode: 409,
+                        title: "Server Error"
+                    ),
+                    _ => Problem(
+                        detail: error.Message,
+                        statusCode: 500,
+                        title: "Server error"
+                    )
+                }
+            );
+
+
+        }
+
+
 
     }
 }

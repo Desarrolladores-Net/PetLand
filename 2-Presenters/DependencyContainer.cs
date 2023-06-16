@@ -37,6 +37,10 @@ namespace Presenters
             services.AddScoped<IGetOnePetOutport, GetOnePetPresenter>();
             services.AddScoped<IGetApplicationsOutport, GetApplicationPresenter>();
             services.AddScoped<IOneAppOutport, GetOneApplicationPresenter>();
+            services.AddScoped<ISetApplicationStateOutport, SetApplicationStatePresenter>();
+
+
+            
             return services;
         }
     }

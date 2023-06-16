@@ -40,15 +40,14 @@ namespace UseCases.Case
                 var result = new GetApplicationsResult()
                 {
                     Applications = entity,
-                    Quanty = await _unitOfWork.ApplicationRepository.Count()
+                    Quanty = await _unitOfWork.ApplicationRepository.Count(state)
                 };
 
                 await _outport.Handle(result);
 
             }
             catch (System.Exception ex)
-            {
-                
+            {              
                 await _outport.Handle(new Error(ErrorReason.FailDatabase, "No se pudo establecer contacto con la base de datos"));
             }
         }
