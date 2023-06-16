@@ -68,7 +68,7 @@ namespace Infra.Repositories
 
         public Task<List<Application>> GetAll(int skip, ApplicationState state)
         {
-            return _context.Application.Where(x => x.ApplicationState == state).OrderBy(x => x.Date).Skip(skip).ToListAsync();
+            return _context.Application.Where(x => x.ApplicationState == state).OrderBy(x => x.Date).Skip(skip).Take(10).ToListAsync();
         }
 
         public Task<int> Count(ApplicationState state)
