@@ -12,9 +12,9 @@ var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
 
 builder.WebHost.UseKestrel().ConfigureKestrel((context, options) =>
 {
-    options.Listen(IPAddress.Any, Int32.Parse(port), listenOptions => 
+    options.Listen(IPAddress.Any, Int32.Parse(port), listenOptions =>
     {
-        
+
     });
 });
 
@@ -35,11 +35,10 @@ builder.Services.AddMyServices(!builder.Environment.IsDevelopment() ? builder.Co
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 
 app.UseHttpsRedirection();
