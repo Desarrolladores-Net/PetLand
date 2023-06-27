@@ -19,9 +19,9 @@ namespace Infra.Data
         {
             var OptionBuilder = new DbContextOptionsBuilder<AppDbContext>();
          
-
-            OptionBuilder.UseNpgsql("Host=127.0.0.1;Port=5432;Database=petland;User Id=postgres;Password=9902;");
-
+            //var connection = "Server=localhost;Port=3308;Database=petland;Uid=root;Pwd=9902;";
+            var connection = "Server=mysql5048.site4now.net;Database=db_a9b805_petland;Uid=a9b805_petland;Pwd=brianpl990227;";
+            OptionBuilder.UseMySql(connection, ServerVersion.AutoDetect(connection));
             return new AppDbContext(OptionBuilder.Options);
 
 

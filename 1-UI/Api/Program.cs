@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
         cor.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
 });
-builder.Services.AddMyServices(builder.Configuration.GetConnectionString("Dev"));
+builder.Services.AddMyServices(builder.Environment.IsDevelopment() ? builder.Configuration.GetConnectionString("Dev") : builder.Configuration.GetConnectionString("production"));
 
 var app = builder.Build();
 
