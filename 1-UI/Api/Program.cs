@@ -30,7 +30,7 @@ builder.Services.AddCors(options =>
         cor.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
 });
-builder.Services.AddMyServices(!builder.Environment.IsDevelopment() ? builder.Configuration.GetConnectionString("Dev") : builder.Configuration.GetConnectionString("production"));
+builder.Services.AddMyServices(builder.Environment.IsDevelopment() ? builder.Configuration.GetConnectionString("Dev") : builder.Configuration.GetConnectionString("production"));
 
 var app = builder.Build();
 
