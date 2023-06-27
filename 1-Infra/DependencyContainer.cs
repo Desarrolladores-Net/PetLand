@@ -18,6 +18,7 @@ namespace Infra
         public static IServiceCollection AddPostgreSQL(this IServiceCollection services, string connectionString)
         {
 
+            Console.WriteLine("ESTE ES EL CONNECTION STRING: "+connectionString);
             services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
