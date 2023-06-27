@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: conqr
+    env: docker
+    dockerfilePath: ./dockerfile
+    healthCheckPath: /healthz
