@@ -23,12 +23,16 @@ namespace Api.Controllers
         private IRegisterUserInport RegisterInport;
         private IRegisterUserOutport RegisterOutport;
         private IConfiguration Configuration;
+        private ILoginInport _loginInport;
+        private ILoginOutport _loginOutport;
 
-        public UserController(IRegisterUserInport registerInport, IRegisterUserOutport registerOutport, IConfiguration configuration)
+        public UserController(IRegisterUserInport registerInport, IRegisterUserOutport registerOutport, IConfiguration configuration, ILoginInport loginInport, ILoginOutport loginOutport)
         {
             RegisterInport = registerInport;
             RegisterOutport = registerOutport;
             Configuration = configuration;
+            _loginInport = loginInport;
+            _loginOutport = loginOutport;
         }
 
         [HttpPost]
@@ -54,6 +58,36 @@ namespace Api.Controllers
                 )
             });
 
+        }
+
+
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginEndpoint(LoginDTO dto)
+        {
+            await _loginInport.Handle(dto, Configuration["SecretKey"]);
+
+            var result = ((IPresenter<OneOf<LoginResult, Error>>)_loginOutport).Content;
+
+            return result.Match(
+            data => Ok(data),
+            error => error switch 
+            {
+                Error {Reason: ErrorReason.AlreadyExist} => Problem(
+                    detail: error.Message,
+                    statusCode: 409,
+                    title: "Server error" 
+                ),
+                Error {Reason: ErrorReason.Unauthorized} => Problem(
+                    detail: error.Message,
+                    statusCode: 401,
+                    title: "Server error" 
+                ),
+                 _ => Problem(
+                    detail: error.Message,
+                    statusCode: 500,
+                    title: "Server Error"
+                )
+            });
 
         }
 

@@ -40,6 +40,10 @@ namespace Infra.Repositories
 
         public Task<User> GetOne(string id) => _context.User.FindAsync(id).AsTask()!;
 
+        public Task<User> SignIn(string value, string password)
+        {
+            return _context.User.Where(x => (x.Email == value || x.Phone == value) && x.Password == password).FirstOrDefaultAsync();
+        }
 
         public Task UpdateAsync(User entity)
         {

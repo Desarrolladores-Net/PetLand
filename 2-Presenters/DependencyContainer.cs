@@ -38,7 +38,7 @@ namespace Presenters
             services.AddScoped<IGetApplicationsOutport, GetApplicationPresenter>();
             services.AddScoped<IOneAppOutport, GetOneApplicationPresenter>();
             services.AddScoped<ISetApplicationStateOutport, SetApplicationStatePresenter>();
-
+            services.AddScoped<ILoginOutport, LoginPresenter>();
 
             
             return services;

@@ -9,7 +9,8 @@ public enum ErrorReason{
     AlreadyExist,
     FailDatabase,
     CreateFile,
-    SaveEntity   
+    SaveEntity,
+    Unauthorized   
 }
 
 public class Error : Exception
