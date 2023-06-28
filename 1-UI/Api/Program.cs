@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
+var port = "5000";//Environment.GetEnvironmentVariable("PORT") ?? "3000";
 
 builder.WebHost.UseKestrel().ConfigureKestrel((context, options) =>
 {
@@ -30,7 +30,7 @@ builder.Services.AddCors(options =>
         cor.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
     });
 });
-builder.Services.AddMyServices(builder.Environment.IsDevelopment() ? builder.Configuration.GetConnectionString("Dev") : builder.Configuration.GetConnectionString("production"));
+builder.Services.AddMyServices(!builder.Environment.IsDevelopment() ? builder.Configuration.GetConnectionString("Dev") : builder.Configuration.GetConnectionString("production"));
 
 var app = builder.Build();
 
