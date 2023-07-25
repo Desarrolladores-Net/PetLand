@@ -25,14 +25,18 @@ namespace Api.Controllers
         private IConfiguration Configuration;
         private ILoginInport _loginInport;
         private ILoginOutport _loginOutport;
+        private IGetAllUsersInport _getAllUsersInport;
+        private IGetAllUsersOutport _getAllUsersOutport;
 
-        public UserController(IRegisterUserInport registerInport, IRegisterUserOutport registerOutport, IConfiguration configuration, ILoginInport loginInport, ILoginOutport loginOutport)
+        public UserController(IRegisterUserInport registerInport, IRegisterUserOutport registerOutport, IConfiguration configuration, ILoginInport loginInport, ILoginOutport loginOutport, IGetAllUsersInport getAllUsersInport, IGetAllUsersOutport getAllUsersOutport)
         {
             RegisterInport = registerInport;
             RegisterOutport = registerOutport;
             Configuration = configuration;
             _loginInport = loginInport;
             _loginOutport = loginOutport;
+            _getAllUsersInport = getAllUsersInport;
+            _getAllUsersOutport = getAllUsersOutport;
         }
 
         [HttpPost]
@@ -67,6 +71,36 @@ namespace Api.Controllers
             await _loginInport.Handle(dto, Configuration["SecretKey"]);
 
             var result = ((IPresenter<OneOf<LoginResult, Error>>)_loginOutport).Content;
+
+            return result.Match(
+            data => Ok(data),
+            error => error switch 
+            {
+                Error {Reason: ErrorReason.AlreadyExist} => Problem(
+                    detail: error.Message,
+                    statusCode: 409,
+                    title: "Server error" 
+                ),
+                Error {Reason: ErrorReason.Unauthorized} => Problem(
+                    detail: error.Message,
+                    statusCode: 401,
+                    title: "Server error" 
+                ),
+                 _ => Problem(
+                    detail: error.Message,
+                    statusCode: 500,
+                    title: "Server Error"
+                )
+            });
+
+        }
+
+        [HttpGet("all")]
+        public async Task<IActionResult> LoginEndpoint([FromQuery]GetAllUserDTO dto)
+        {
+            await _getAllUsersInport.Handle(dto);
+
+            var result = ((IPresenter<OneOf<List<GetAllUserResult>, Error>>)_getAllUsersOutport).Content;
 
             return result.Match(
             data => Ok(data),

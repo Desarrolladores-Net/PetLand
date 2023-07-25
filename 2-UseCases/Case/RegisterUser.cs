@@ -34,37 +34,46 @@ namespace UseCases.Case
 
         public async Task Handle(RegisterDTO dto, string secretKey)
         {
-            var exist = await UnitOfWork.UserRepository.Exist(dto.Email);
-
-            if(!exist)
+            try
             {
-                var entity = dto.Adapt<User>();
-                entity.Role = "User";
-                await UnitOfWork.UserRepository.AddAsync(entity);
-                await UnitOfWork.SaveAsync();
-                var result = entity.Adapt<RegisterResult>();
-                result.Id = entity.Id;
-                List<Claim> claims = new()
+
+                var exist = await UnitOfWork.UserRepository.Exist(dto.Email, dto.Phone);
+                
+                if (!exist)
                 {
-                    new Claim(ClaimTypes.Role, entity.Role),
-                    new Claim(ClaimTypes.Email, entity.Email)
-                };
+                    var entity = dto.Adapt<User>();
+                    entity.Role = "User";
+                    await UnitOfWork.UserRepository.AddAsync(entity);
+                    await UnitOfWork.SaveAsync();
+                    var result = entity.Adapt<RegisterResult>();
+                    result.Id = entity.Id;
+                    List<Claim> claims = new()
+                    {
+                        new Claim(ClaimTypes.Role, entity.Role),
+                        new Claim(ClaimTypes.Email, entity.Email)
+                    };
 
-                GenerateJwtMO model = new ()
+                    GenerateJwtMO model = new()
+                    {
+                        Claims = claims,
+                        SecretKey = secretKey
+                    };
+
+                    result.Token = TokenManager.GenerateJwt(model);
+                    await OutputPort.Handle(result);
+
+                }
+                else
                 {
-                    Claims = claims,
-                    SecretKey = secretKey
-                };
-
-                result.Token = TokenManager.GenerateJwt(model);
-                await OutputPort.Handle(result);
-
+                    await OutputPort.Handle(new Error(ErrorReason.AlreadyExist, "Ya hay un usuario con ese email"));
+                }
             }
-            else
+            catch (System.Exception ex)
             {
-                await OutputPort.Handle(new Error(ErrorReason.AlreadyExist, "Ya hay un usuario con ese email"));
+                
+                await OutputPort.Handle(new Error(ErrorReason.FailDatabase, "Error al conectar con la base de datos"));
+                
             }
-            
         }
 
     }

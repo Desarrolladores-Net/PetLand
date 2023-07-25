@@ -23,7 +23,7 @@ namespace Infra.Files
         {
             try
             {
-                var path = Path.Combine($"wwwroot/pet/{petId}");
+                var path = Path.Combine($"wwwroot/pet-reported/{petId}");
 
                 CreatePath(path);
 

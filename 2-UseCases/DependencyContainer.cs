@@ -33,7 +33,7 @@ namespace UseCases
             services.AddScoped<IGetOneApplicationInport, GetOneApplication>();
             services.AddScoped<ISetApplicationStateInport, SetApplicationState>();
             services.AddScoped<ILoginInport, Login>();
-
+            services.AddScoped<IGetAllUsersInport, GetAllUsers>();
 
             return services;
         }

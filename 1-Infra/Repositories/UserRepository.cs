@@ -26,7 +26,7 @@ namespace Infra.Repositories
             return user!;
         }
 
-        public Task<bool> Exist(string email) => _context.User.AnyAsync(x => x.Email == email);
+        public Task<bool> Exist(string email, string phone) => _context.User.AnyAsync(x => x.Email == email || x.Phone == phone);
 
         public Task<List<User>> GetAll(int skip)
         {
@@ -36,6 +36,11 @@ namespace Infra.Repositories
         public Task<List<User>> GetAll()
         {
            return _context.User.ToListAsync();
+        }
+
+        public Task<List<User>> GetAll(int skip, int take)
+        {
+            return _context.User.OrderBy(x => x.Fullname).Skip(skip).Take(take).ToListAsync();
         }
 
         public Task<User> GetOne(string id) => _context.User.FindAsync(id).AsTask()!;
