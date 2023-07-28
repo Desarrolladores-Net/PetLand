@@ -10,6 +10,6 @@ namespace UseCases.OutPorts
 {
     public interface IGetAllUsersOutport
     {
-        Task Handle(OneOf<List<GetAllUserResult>, Error> result);
+        Task Handle(OneOf<GetAllUserResult, Error> result);
     }
 }

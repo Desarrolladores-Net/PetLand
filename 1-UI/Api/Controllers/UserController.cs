@@ -100,7 +100,7 @@ namespace Api.Controllers
         {
             await _getAllUsersInport.Handle(dto);
 
-            var result = ((IPresenter<OneOf<List<GetAllUserResult>, Error>>)_getAllUsersOutport).Content;
+            var result = ((IPresenter<OneOf<GetAllUserResult, Error>>)_getAllUsersOutport).Content;
 
             return result.Match(
             data => Ok(data),

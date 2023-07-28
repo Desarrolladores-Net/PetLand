@@ -7,10 +7,7 @@ namespace Domain.ResultObject.User
 {
     public class GetAllUserResult
     {
-        public string Id { get; set; }
-        public string Fullname { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string Role { get; set; }
+        public List<GetAllUserItemResult> Users { get; set; }
+        public int Quanty { get; set; }
     }
 }

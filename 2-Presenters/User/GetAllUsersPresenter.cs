@@ -9,11 +9,11 @@ using UseCases.OutPorts;
 
 namespace Presenters.User
 {
-    public class GetAllUsersPresenter : IPresenter<OneOf<List<GetAllUserResult>, Error>>, IGetAllUsersOutport
+    public class GetAllUsersPresenter : IPresenter<OneOf<GetAllUserResult, Error>>, IGetAllUsersOutport
     {
-        public OneOf<List<GetAllUserResult>, Error> Content {private set; get;}
+        public OneOf<GetAllUserResult, Error> Content {private set; get;}
 
-        public Task Handle(OneOf<List<GetAllUserResult>, Error> result)
+        public Task Handle(OneOf<GetAllUserResult, Error> result)
         {
             Content = result;
             return Task.CompletedTask;

@@ -28,9 +28,16 @@ namespace UseCases.Case
         {
             try
             {
-                var users = await _unitOfWork.UserRepository.GetAll(dto.Skip, dto.Take);
+                var data = await _unitOfWork.UserRepository.GetAll(dto.Skip, dto.Take);
 
-                var result = users.Adapt<List<GetAllUserResult>>();
+                var users = data.Adapt<List<GetAllUserItemResult>>();
+                int total = await _unitOfWork.UserRepository.Count();
+
+                GetAllUserResult result = new()
+                {
+                    Quanty = total,
+                    Users = users
+                };
 
                 await _outport.Handle(result);
 

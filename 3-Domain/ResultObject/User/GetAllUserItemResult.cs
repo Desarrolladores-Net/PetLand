@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Domain.Entity
+namespace Domain.ResultObject.User
 {
-    public class User
+    public class GetAllUserItemResult
     {
         public string Id { get; set; }
         public string Fullname { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public List<Pet> PetsReported { get; set; }
-        public List<Application> UserResponse { get; set; }
         public string Role { get; set; }
-        public string Password { get; set; }
         public bool Ban { get; set; }
     }
 }

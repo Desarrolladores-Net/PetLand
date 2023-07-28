@@ -49,7 +49,7 @@ namespace UseCases
             .Map(dest => dest.Id, Guid.NewGuid().ToString());
             
             TypeAdapterConfig<Pet,GetOnePetResult>.NewConfig();
-            TypeAdapterConfig<User, GetAllUserResult>.NewConfig();
+            TypeAdapterConfig<User, GetAllUserItemResult>.NewConfig();
 
         }
     }

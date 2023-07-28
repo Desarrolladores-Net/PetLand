@@ -33,6 +33,11 @@ namespace Infra.Repositories
             return _context.User.Skip(skip).Take(10).ToListAsync();
         }
 
+        public Task<int> Count()
+        {
+            return _context.User.CountAsync();
+        }
+
         public Task<List<User>> GetAll()
         {
            return _context.User.ToListAsync();
